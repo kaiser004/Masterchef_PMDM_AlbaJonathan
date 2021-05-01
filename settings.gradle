@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "Materchef_PMDM_AlbaJonathan"
