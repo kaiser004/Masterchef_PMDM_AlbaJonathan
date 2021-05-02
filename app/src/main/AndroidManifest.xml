@@ -9,13 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Materchef_PMDM_AlbaJonathan">
-        <activity android:name=".SplashScreen">
+        <activity android:name="com.politecnico.masterchef_pmdm_albajonathan.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.politecnico.masterchef_pmdm_albajonathan.LoginActivity" />
+        <activity android:name="com.politecnico.masterchef_pmdm_albajonathan.EventosActivity" />
+        <activity android:name="com.politecnico.masterchef_pmdm_albajonathan.EventoActivity" />
+        <activity android:name="com.politecnico.masterchef_pmdm_albajonathan.RegistroActivity" />
+
     </application>
 
 </manifest>

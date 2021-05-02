@@ -1,9 +1,12 @@
-package com.politecnico.materchef_pmdm_albajonathan;
+package com.politecnico.masterchef_pmdm_albajonathan;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.politecnico.materchef_pmdm_albajonathan.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,8 +52,8 @@ public class EventosActivity extends AppCompatActivity  {
         }
 
         //  call the constructor of CustomAdapter to send the reference and data to Adapter
-        CustomAdapter customAdapter = new CustomAdapter(EventosActivity.this, nombre, direccion, localidad , telefono);
-        recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
+        //CustomAdapter customAdapter = new CustomAdapter(EventosActivity.this, nombre, direccion, localidad , telefono);
+        //recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
     }
 
     public String loadJSONFromAsset() {
