@@ -1,3 +1,5 @@
+
+/*
 package com.politecnico.materchef_pmdm_albajonathan;
 
 import android.content.Context;
@@ -70,3 +72,4 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 }
 
+*/

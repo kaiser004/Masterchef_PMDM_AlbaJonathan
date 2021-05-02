@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.27"
-        app:srcCompat="@drawable/PDF" />
+        app:srcCompat="@drawable/logopdf" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
