@@ -1,6 +1,8 @@
 package com.politecnico.masterchef_pmdm_albajonathan;
 
 import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +28,8 @@ public class EventosActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventos);
+    }
+        /*
         // get the reference of RecyclerView
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         // set a LinearLayoutManager with default vertical orientation
@@ -71,5 +75,5 @@ public class EventosActivity extends AppCompatActivity  {
         }
         return json;
     }
-
+*/
 }

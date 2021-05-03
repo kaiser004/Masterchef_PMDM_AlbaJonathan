@@ -6,7 +6,7 @@
     android:background="#083C3C">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/botonRegistro"
+        android:id="@+id/btnRegistro"
         android:layout_width="222dp"
         android:layout_height="46dp"
         android:layout_marginStart="94dp"

@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 import android.widget.EditText;
 import android.widget.Toast;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,6 +39,15 @@ public class LoginActivity extends AppCompatActivity {
         botonLogin = findViewById(R.id.botonLogin);
         botonRegistro = findViewById(R.id.botonRegistro);
 
+        botonRegistro = (Button) findViewById(R.id.btnRegistrarse);
+        botonRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this , RegistroActivity.class);
+                startActivity(intent);
+            }
+        });
+      
         botonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
