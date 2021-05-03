@@ -43,7 +43,7 @@
         app:srcCompat="@drawable/masterchef" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button3"
+        android:id="@+id/btnIniciarSesion"
         android:layout_width="187dp"
         android:layout_height="44dp"
         android:background="@drawable/boton_redondo"
@@ -56,7 +56,7 @@
         app:layout_constraintVertical_bias="0.85" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button4"
+        android:id="@+id/btnRegistrarse"
         android:layout_width="187dp"
         android:layout_height="42dp"
         android:background="@drawable/boton_redondo"
