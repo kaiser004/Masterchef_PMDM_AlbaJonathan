@@ -2,6 +2,7 @@
 
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_margin="5dp"
@@ -21,7 +22,9 @@
             android:layout_height="wrap_content"
             android:text="MasterChef1"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:visibility="visible"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/fecha"

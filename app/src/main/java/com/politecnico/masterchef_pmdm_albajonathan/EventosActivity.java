@@ -55,22 +55,23 @@ public class EventosActivity extends AppCompatActivity  {
         // set a LinearLayoutManager with default vertical orientation
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-
+/*
         eventosActivos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscarRegistro("http://10.0.2.2/masterchef/buscar.php" + "En curso");
+                buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "En curso");
             }
         });
 
         eventosPasados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscarRegistro("http://10.0.2.2/masterchef/buscar.php" + "Finalizado");
+                buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "Finalizado");
             }
-        });
+        });*/
 
-        //  call the constructor of CustomAdapter to send the reference and data to Adapter
+        //buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "Finalizado");
+        buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "En curso");
         CustomAdapter customAdapter = new CustomAdapter(EventosActivity.this, nombre, fecha, hora);
         recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
 
