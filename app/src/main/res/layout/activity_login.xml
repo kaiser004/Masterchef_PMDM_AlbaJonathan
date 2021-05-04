@@ -21,13 +21,17 @@
 
     <androidx.appcompat.widget.AppCompatButton
 
-
         android:id="@+id/botonLogin"
         android:layout_width="187dp"
         android:layout_height="44dp"
         android:background="@drawable/boton_redondo"
         android:text="Iniciar Sesión"
         android:textColor="#FFFFFF"
+
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,8 +73,7 @@
             android:hint="Correo Electrónico"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="18sp" />
+            android:textColorHint="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -94,8 +97,7 @@
             android:hint="Contraseña"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="18sp" />
+            android:textColorHint="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

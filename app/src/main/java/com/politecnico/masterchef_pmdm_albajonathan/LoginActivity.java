@@ -1,5 +1,7 @@
 package com.politecnico.masterchef_pmdm_albajonathan;
 
+// @Author - Alba Orbegozo / Jonathan Lopez - PMDM Masterchef - CI Politécnico Estella
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,9 +21,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.textfield.TextInputLayout;
 import com.politecnico.materchef_pmdm_albajonathan.R;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
 
         editCorreo = findViewById(R.id.editCorreo);
         editClave = findViewById(R.id.editClave);

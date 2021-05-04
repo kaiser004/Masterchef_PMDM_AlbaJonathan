@@ -1,5 +1,6 @@
-
 package com.politecnico.masterchef_pmdm_albajonathan;
+
+// @Author - Alba Orbegozo / Jonathan Lopez - PMDM Masterchef - CI Politécnico Estella
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.politecnico.materchef_pmdm_albajonathan.R;
-
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
