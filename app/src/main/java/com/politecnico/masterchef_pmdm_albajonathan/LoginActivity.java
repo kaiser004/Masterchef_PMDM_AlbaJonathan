@@ -4,13 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import android.widget.EditText;
 import android.widget.Toast;
-
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -23,12 +19,17 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputLayout;
 import com.politecnico.materchef_pmdm_albajonathan.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText editCorreo;
+    EditText editCorreo, editClave;
     Button botonLogin, botonRegistro;
+    String correo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,22 +37,28 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         editCorreo = findViewById(R.id.editCorreo);
+        editClave = findViewById(R.id.editClave);
         botonLogin = findViewById(R.id.botonLogin);
         botonRegistro = findViewById(R.id.botonRegistro);
 
-        botonRegistro = (Button) findViewById(R.id.btnRegistrarse);
         botonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this , RegistroActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
                 startActivity(intent);
             }
         });
-      
+
         botonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validarCorreo("http://10.0.2.2/masterchef/validar_correo.php");
+
+                correo = editCorreo.getText().toString();
+                if (!correo.isEmpty()) {
+                    validarCorreo("http://10.0.2.2/masterchef/validar_correo.php");
+                } else {
+                    Toast.makeText(LoginActivity.this, "Introduzca el correo por favor", Toast.LENGTH_LONG);
+                }
             }
         });
     }
@@ -77,17 +84,23 @@ public class LoginActivity extends AppCompatActivity {
                     message = "Imposible conectarse con el servidor";
                 } else if (error instanceof AuthFailureError) {
                     message = "Error de autenticación, comprueba la conexión";
-                } else  if (error instanceof ParseError) {
+                } else if (error instanceof ParseError) {
                     message = "Error de parseo. Intenta de nuevo un poco más tarde";
                 } else if (error instanceof NoConnectionError) {
                     message = "Imposible conectarse a Internet";
                 } else if (error instanceof TimeoutError) {
-                    message = "Tiempo de espera agotado, comprueba la conexión a Internet" +
-                            "";
+                    message = "Tiempo de espera agotado, comprueba la conexión a Internet";
                 }
                 Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG);
             }
-        });
+        }) {
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param = new HashMap<String, String>();
+                param.put("correo", editCorreo.getText().toString());
+                param.put("clave", editClave.getText().toString());
+                return param;
+            }
+        };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
