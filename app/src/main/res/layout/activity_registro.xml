@@ -63,6 +63,7 @@
             app:hintTextColor="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
@@ -78,6 +79,7 @@
             android:textColorHint="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtApellidos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
@@ -92,6 +94,7 @@
             android:textColorHint="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtDepartamento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
@@ -106,6 +109,7 @@
             android:textColorHint="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtIntolerancia"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#00FFFFFF"
@@ -120,10 +124,11 @@
             android:textColorHint="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:hint="Correo"/>
+                android:hint="Correo" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,6 +138,7 @@
             android:textColorHint="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtClave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
