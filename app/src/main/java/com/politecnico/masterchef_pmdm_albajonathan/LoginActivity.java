@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText editCorreo, editClave;
     Button botonLogin, botonRegistro;
     String correo;
+    Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,26 +53,27 @@ public class LoginActivity extends AppCompatActivity {
         botonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 correo = editCorreo.getText().toString();
                 if (!correo.isEmpty()) {
                     validarCorreo("http://10.0.2.2/masterchef/validar_correo.php");
                 } else {
-                    Toast.makeText(LoginActivity.this, "Introduzca el correo por favor", Toast.LENGTH_LONG);
+                    toast = Toast.makeText(LoginActivity.this, "Introduzca el correo por favor", Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         });
     }
 
     private void validarCorreo(String URL) {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()) {
                     Intent i = new Intent(getApplicationContext(), EventosActivity.class);
                     startActivity(i);
                 } else {
-                    Toast.makeText(LoginActivity.this, "Correo no validado", Toast.LENGTH_LONG);
+                    toast = Toast.makeText(LoginActivity.this, "Correo no validado", Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -91,9 +93,11 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (error instanceof TimeoutError) {
                     message = "Tiempo de espera agotado, comprueba la conexión a Internet";
                 }
-                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG);
+                toast = Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG);
+                toast.show();
             }
         }) {
+
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param = new HashMap<String, String>();
                 param.put("correo", editCorreo.getText().toString());
