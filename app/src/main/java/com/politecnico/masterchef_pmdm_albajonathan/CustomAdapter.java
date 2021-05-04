@@ -1,30 +1,29 @@
 
-/*
-package com.politecnico.materchef_pmdm_albajonathan;
+package com.politecnico.masterchef_pmdm_albajonathan;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.politecnico.materchef_pmdm_albajonathan.R;
+
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     ArrayList<String> nombre;
-    ArrayList<String> direccion;
-    ArrayList<String> localidad;
-    ArrayList<String> telefono;
+    ArrayList<String> fecha;
+    ArrayList<String> hora;
     Context context;
 
-    public CustomAdapter(Context context, ArrayList<String> nombre, ArrayList<String> direccion, ArrayList<String> localidad, ArrayList<String> telefono) {
+    public CustomAdapter(Context context, ArrayList<String> nombre, ArrayList<String> fecha, ArrayList<String> hora) {
         this.context = context;
         this.nombre = nombre;
-        this.direccion = direccion;
-        this.localidad = localidad;
-        this.telefono = telefono;
+        this.fecha = fecha;
+        this.hora = hora;
     }
 
     @Override
@@ -39,17 +38,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         // set the data in items
         holder.nombre.setText(nombre.get(position));
-        holder.direccion.setText(direccion.get(position));
-        holder.localidad.setText(localidad.get(position));
-        holder.telefono.setText(telefono.get(position));
-        // implement setOnClickListener event on item view.
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // display a toast with person name on item click
-                Toast.makeText(context, telefono.get(position), Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.fecha.setText(fecha.get(position));
+        holder.hora.setText(hora.get(position));
     }
 
     @Override
@@ -58,18 +48,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView nombre, direccion, localidad , telefono;// init the item view's
+        TextView nombre, fecha, hora;// init the item view's
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             // get the reference of item view's
             nombre = (TextView) itemView.findViewById(R.id.nombre);
-            direccion = (TextView) itemView.findViewById(R.id.direccion);
-            localidad = (TextView) itemView.findViewById(R.id.localidad);
-            telefono =  (TextView) itemView.findViewById(R.id.telefono);
+            fecha = (TextView) itemView.findViewById(R.id.fecha);
+            hora = (TextView) itemView.findViewById(R.id.hora);
         }
     }
 }
-
-*/
