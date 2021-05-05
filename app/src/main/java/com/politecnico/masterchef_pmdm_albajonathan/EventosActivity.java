@@ -2,8 +2,9 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 
 // @Author - Alba Orbegozo / Jonathan Lopez - PMDM Masterchef - CI Politécnico Estella
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,37 +28,42 @@ public class EventosActivity extends AppCompatActivity  {
     ArrayList<String> fechas = new ArrayList<>();
     ArrayList<String> horas = new ArrayList<>();
 
+    Button eventosActivos;
+    Button eventosPasados;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventos);
         getSupportActionBar().hide();
 
-
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "En Curso");
 
-        /*
+        eventosActivos = (Button) findViewById(R.id.btnEventosActivos);
         eventosActivos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscarRegistro("http://10.0.2.2/masterchef/buscar.php" + "En curso");
+                buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "En Curso");
+                nombres.clear();
+                fechas.clear();
+                horas.clear();
             }
         });
 
+        eventosPasados = (Button) findViewById(R.id.btnEventosPasados);
         eventosPasados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscarRegistro("http://10.0.2.2/masterchef/buscar.php" + "Finalizado");
+                buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "Finalizado");
+                nombres.clear();
+                fechas.clear();
+                horas.clear();
             }
         });
-         */
-
-        //PRUEBA ACTUALIZAR PROYECTO
-
-        buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "Finalizado");
 
     }
 

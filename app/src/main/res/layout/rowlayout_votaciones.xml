@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_margin="5dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <!--
+        items for a single row of RecyclerView
+        -->
+
+        <TextView
+            android:id="@+id/idEquipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Equipo A"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/idPresentacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Presentación: "
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <NumberPicker
+            android:layout_width="382dp"
+            android:layout_height="32dp"/>
+        <!--android:minValue="@{0}"
+        android:maxValue="@{100}"
+        android:value="@{50}"-->
+
+        <TextView
+            android:id="@+id/idServicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Servicio: "
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <NumberPicker
+            android:layout_width="382dp"
+            android:layout_height="32dp"/>
+        <!--android:minValue="@{0}"
+        android:maxValue="@{100}"
+        android:value="@{50}"-->
+
+        <TextView
+            android:id="@+id/idSabor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sabor: "
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <NumberPicker
+            android:layout_width="382dp"
+            android:layout_height="32dp"/>
+        <!--android:minValue="@{0}"
+        android:maxValue="@{100}"
+        android:value="@{50}"-->
+
+        <TextView
+            android:id="@+id/idTriptico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Imagen: "
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <NumberPicker
+            android:layout_width="382dp"
+            android:layout_height="32dp"/>
+        <!--android:minValue="@{0}"
+        android:maxValue="@{100}"
+        android:value="@{50}"-->
+
+        <TextView
+            android:id="@+id/idImagen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Triptico: "
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <NumberPicker
+            android:layout_width="382dp"
+            android:layout_height="32dp"/>
+            <!--android:minValue="@{0}"
+            android:maxValue="@{100}"
+            android:value="@{50}"-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/botonGuardar"
+            android:layout_width="172dp"
+            android:layout_height="34dp"
+            android:background="@drawable/boton_redondo"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:layout_gravity="center"
+
+            android:shadowRadius="5"
+            android:text="Guardar votacion"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

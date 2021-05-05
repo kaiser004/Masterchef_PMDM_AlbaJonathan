@@ -30,31 +30,31 @@
         app:layout_constraintVertical_bias="0.665">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/txtLugar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lugar"
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/txtFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Fecha"
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/txtHora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hora"
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/txtDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sala"
+            android:text="Descripción"
             android:textAlignment="center" />
     </LinearLayout>
 
@@ -84,12 +84,13 @@
         app:layout_constraintVertical_bias="0.865" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button2"
+        android:id="@+id/botonVotacion"
         android:layout_width="208dp"
         android:layout_height="48dp"
+        android:background="@drawable/boton_redondo"
+        android:clickable="true"
         android:text="Realizar Votación"
         android:textColor="#FFFFFF"
-        android:background="@drawable/boton_redondo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -98,7 +99,7 @@
         app:layout_constraintVertical_bias="0.976" />
 
     <TextView
-        android:id="@+id/textNombreEvento"
+        android:id="@+id/txtNombreEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NOMBRE EVENTO"
