@@ -55,10 +55,9 @@ public class EventosActivity extends AppCompatActivity  {
         });
          */
 
-
+        //PRUEBA ACTUALIZAR PROYECTO
 
         buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "Finalizado");
-
 
     }
 
