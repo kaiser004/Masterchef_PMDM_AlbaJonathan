@@ -17,17 +17,18 @@
         items for a single row of RecyclerView
         -->
         <TextView
-            android:id="@+id/nombre"
+            android:id="@+id/idNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MasterChef1"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:textStyle="bold"
             android:visibility="visible"
             tools:visibility="visible" />
 
         <TextView
-            android:id="@+id/fecha"
+            android:id="@+id/idFecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2021-01-20"
@@ -35,7 +36,7 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/hora"
+            android:id="@+id/idHora"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="08:15:00"

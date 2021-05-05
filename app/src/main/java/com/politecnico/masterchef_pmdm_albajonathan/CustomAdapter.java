@@ -1,28 +1,30 @@
 package com.politecnico.masterchef_pmdm_albajonathan;
 
-// @Author - Alba Orbegozo / Jonathan Lopez - PMDM Masterchef - CI Politécnico Estella
+// @Author - Alba Orbegozo / Jonathan Lopez - PMDM Masterchef - CI Politecnico Estella
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
 import com.politecnico.materchef_pmdm_albajonathan.R;
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
-    ArrayList<String> nombre;
-    ArrayList<String> fecha;
-    ArrayList<String> hora;
+    ArrayList<String> nombres;
+    ArrayList<String> fechas;
+    ArrayList<String> horas;
     Context context;
 
     public CustomAdapter(Context context, ArrayList<String> nombre, ArrayList<String> fecha, ArrayList<String> hora) {
         this.context = context;
-        this.nombre = nombre;
-        this.fecha = fecha;
-        this.hora = hora;
+        this.nombres = nombre;
+        this.fechas = fecha;
+        this.horas = hora;
     }
 
     @Override
@@ -36,14 +38,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         // set the data in items
-        holder.nombre.setText(nombre.get(position));
-        holder.fecha.setText(fecha.get(position));
-        holder.hora.setText(hora.get(position));
+        holder.nombre.setText(nombres.get(position));
+        holder.fecha.setText(fechas.get(position));
+        holder.hora.setText(horas.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, EventoActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
-        return nombre.size();
+        return nombres.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -53,9 +64,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             super(itemView);
 
             // get the reference of item view's
-            nombre = (TextView) itemView.findViewById(R.id.nombre);
-            fecha = (TextView) itemView.findViewById(R.id.fecha);
-            hora = (TextView) itemView.findViewById(R.id.hora);
+            nombre = (TextView) itemView.findViewById(R.id.idNombre);
+            fecha = (TextView) itemView.findViewById(R.id.idFecha);
+            hora = (TextView) itemView.findViewById(R.id.idHora);
         }
     }
 }
