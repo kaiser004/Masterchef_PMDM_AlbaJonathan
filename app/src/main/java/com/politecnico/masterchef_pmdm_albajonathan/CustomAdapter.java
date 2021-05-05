@@ -4,11 +4,11 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
 import com.politecnico.materchef_pmdm_albajonathan.R;
 import java.util.ArrayList;
@@ -42,10 +42,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.fecha.setText(fechas.get(position));
         holder.hora.setText(horas.get(position));
 
+        //CUANDO SE PULSA UN EVENTO, TE LLEVA A LA ACTIVITY EVENTO
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //String pos = nombres.get(position);
+
+                //Bundle parametros = new Bundle();
+                //parametros.putString("posicion", pos);
+
                 Intent intent = new Intent(context, EventoActivity.class);
+                //intent.putExtras(parametros);
                 context.startActivity(intent);
             }
         });

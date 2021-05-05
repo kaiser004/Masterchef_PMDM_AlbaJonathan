@@ -18,4 +18,32 @@
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="39dp" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEventosActivos"
+        android:layout_width="184dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="212dp"
+        android:text="Eventos activos"
+        android:background="@drawable/boton_redondo"
+        android:textColor="#FFFFFF" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEventosPasados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="211dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="16dp"
+        android:text="Eventos pasados"
+        android:background="@drawable/boton_redondo"
+        android:textColor="#FFFFFF" />
+
 </RelativeLayout>
