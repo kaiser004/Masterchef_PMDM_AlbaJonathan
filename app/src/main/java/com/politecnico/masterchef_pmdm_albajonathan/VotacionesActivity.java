@@ -1,13 +1,10 @@
 package com.politecnico.masterchef_pmdm_albajonathan;
 
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.politecnico.materchef_pmdm_albajonathan.R;
-
 import java.util.ArrayList;
 
 public class VotacionesActivity extends AppCompatActivity {
@@ -27,6 +24,7 @@ public class VotacionesActivity extends AppCompatActivity {
 
         CustomAdapterVotaciones CustomAdapterVotaciones = new CustomAdapterVotaciones(VotacionesActivity.this, equipos);
         recyclerView.setAdapter(CustomAdapterVotaciones);
+
     }
 
 }

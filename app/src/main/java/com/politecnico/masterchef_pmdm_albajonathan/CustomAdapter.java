@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import com.politecnico.materchef_pmdm_albajonathan.R;
 import java.util.ArrayList;
@@ -18,13 +20,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     ArrayList<String> nombres;
     ArrayList<String> fechas;
     ArrayList<String> horas;
+    ArrayList<String> ids;
     Context context;
 
-    public CustomAdapter(Context context, ArrayList<String> nombre, ArrayList<String> fecha, ArrayList<String> hora) {
+    public CustomAdapter(Context context, ArrayList<String> nombre, ArrayList<String> fecha, ArrayList<String> hora, ArrayList<String> id) {
         this.context = context;
         this.nombres = nombre;
         this.fechas = fecha;
         this.horas = hora;
+        this.ids = id;
     }
 
     @Override
@@ -46,13 +50,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //String pos = nombres.get(position);
-
-                //Bundle parametros = new Bundle();
-                //parametros.putString("posicion", pos);
-
                 Intent intent = new Intent(context, EventoActivity.class);
-                //intent.putExtras(parametros);
+
+                String id = ids.get(position);
+                Bundle parametros = new Bundle();
+                parametros.putString("idE", id);
+                intent.putExtras(parametros);
+
                 context.startActivity(intent);
             }
         });
