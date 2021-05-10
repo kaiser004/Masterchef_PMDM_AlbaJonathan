@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
         editCorreo = findViewById(R.id.editCorreo);
         editClave = findViewById(R.id.editClave);
-        botonLogin = findViewById(R.id.botonLogin);
+        botonLogin = findViewById(R.id.botonVotar);
         botonRegistro = findViewById(R.id.botonRegistro);
 
         botonRegistro.setOnClickListener(new View.OnClickListener() {

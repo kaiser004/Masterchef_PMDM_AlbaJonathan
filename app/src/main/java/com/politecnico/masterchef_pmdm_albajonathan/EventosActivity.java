@@ -27,6 +27,7 @@ public class EventosActivity extends AppCompatActivity  {
     ArrayList<String> nombres = new ArrayList<>();
     ArrayList<String> fechas = new ArrayList<>();
     ArrayList<String> horas = new ArrayList<>();
+    ArrayList<String> ids = new ArrayList<>();
 
     Button eventosActivos;
     Button eventosPasados;
@@ -51,6 +52,7 @@ public class EventosActivity extends AppCompatActivity  {
                 nombres.clear();
                 fechas.clear();
                 horas.clear();
+                ids.clear();
             }
         });
 
@@ -62,6 +64,7 @@ public class EventosActivity extends AppCompatActivity  {
                 nombres.clear();
                 fechas.clear();
                 horas.clear();
+                ids.clear();
             }
         });
 
@@ -78,13 +81,14 @@ public class EventosActivity extends AppCompatActivity  {
                         nombres.add(jsonObject.getString("Nombre_evento"));
                         fechas.add(jsonObject.getString("Fecha"));
                         horas.add(jsonObject.getString("hora"));
+                        ids.add(jsonObject.getString("ID_evento"));
                     } catch (JSONException ex) {
                         toast = Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG);
                         toast.show();
                     }
                 }
 
-                CustomAdapter customAdapter = new CustomAdapter(EventosActivity.this, nombres, fechas, horas);
+                CustomAdapter customAdapter = new CustomAdapter(EventosActivity.this, nombres, fechas, horas, ids);
                 recyclerView.setAdapter(customAdapter);
 
             }

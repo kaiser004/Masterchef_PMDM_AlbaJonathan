@@ -17,8 +17,6 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splashscreen);
         getSupportActionBar().hide();
 
-        getSupportActionBar().hide();
-
         TimerTask tarea = new TimerTask() {
             @Override
             public void run() {
