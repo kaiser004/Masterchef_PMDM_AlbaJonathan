@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.politecnico.materchef_pmdm_albajonathan.R;
@@ -42,6 +43,7 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView equipo;// init the item view's
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
