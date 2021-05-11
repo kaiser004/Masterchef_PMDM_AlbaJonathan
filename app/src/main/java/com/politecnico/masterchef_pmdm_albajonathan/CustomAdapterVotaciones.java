@@ -16,6 +16,7 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
 
     ArrayList<String> equipos;
     Context context;
+    NumberPicker presentacion, servicio, sabor, imagen, triptico;
 
     public CustomAdapterVotaciones(Context context, ArrayList<String> equipo) {
         this.context = context;
@@ -34,6 +35,16 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         // set the data in items
         holder.equipo.setText(equipos.get(position));
+        presentacion.setMinValue(0);
+        presentacion.setMaxValue(100);
+        servicio.setMinValue(0);
+        servicio.setMaxValue(100);
+        sabor.setMinValue(0);
+        sabor.setMaxValue(100);
+        imagen.setMinValue(0);
+        imagen.setMaxValue(100);
+        triptico.setMinValue(0);
+        triptico.setMaxValue(100);
     }
 
     @Override
@@ -50,6 +61,11 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
 
             // get the reference of item view's
             equipo = (TextView) itemView.findViewById(R.id.idEquipo);
+            presentacion = itemView.findViewById(R.id.presentacionNP);
+            servicio = itemView.findViewById(R.id.servicioNP);
+            sabor = itemView.findViewById(R.id.saborNP);
+            imagen = itemView.findViewById(R.id.imagenNP);
+            triptico = itemView.findViewById(R.id.tripticoNP);
         }
     }
 }
