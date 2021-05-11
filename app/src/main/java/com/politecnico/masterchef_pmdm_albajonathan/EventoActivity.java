@@ -2,6 +2,7 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 
 // @Author - Alba Orbegozo / Jonathan Lopez - PMDM Masterchef - CI Politécnico Estella
 
+import android.content.Context;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,16 +10,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.politecnico.materchef_pmdm_albajonathan.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class EventoActivity extends AppCompatActivity {
 
@@ -46,6 +56,8 @@ public class EventoActivity extends AppCompatActivity {
         botonJuez = findViewById(R.id.botonJuez);
         textParticipacion = findViewById(R.id.textParticipacion);
 
+        //String idR = getIntent().getStringExtra("idE");
+        //BuscarRegistrosId("http://10.0.2.2/masterchef/evento.php?id=" + idR);
         evento = getIntent().getStringExtra("idE");
         juez = 1;
         buscarRegistrosId("http://10.0.2.2/masterchef/evento.php?id=" + evento);
@@ -57,6 +69,11 @@ public class EventoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EventoActivity.this, VotacionesActivity.class);
+                Bundle parametros = new Bundle();
+                parametros.putString("idE", evento);
+                intent.putExtras(parametros);
+
+                intent.putExtras(parametros);
                 startActivity(intent);
             }
         });
@@ -85,7 +102,7 @@ public class EventoActivity extends AppCompatActivity {
         }
     }
 
-    private void buscarRegistrosId(String URL) {
+    private void buscarRegistrosId(String URL){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -143,5 +160,7 @@ public class EventoActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
     }
+
+
 
 }

@@ -98,7 +98,6 @@ public class LoginActivity extends AppCompatActivity {
                 toast.show();
             }
         }) {
-
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param = new HashMap<String, String>();
                 param.put("correo", editCorreo.getText().toString());

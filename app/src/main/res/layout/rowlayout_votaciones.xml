@@ -37,9 +37,13 @@
             android:textSize="15sp" />
 
         <NumberPicker
+            android:id="@+id/numberPicker1"
             android:layout_width="382dp"
             android:layout_height="32dp"/>
-        <!--android:minValue="@{0}"
+        <!--
+        android:layout_width="382dp"
+        android:layout_height="32dp"/>
+        android:alue="@{0}"
         android:maxValue="@{100}"
         android:value="@{50}"-->
 
@@ -52,6 +56,7 @@
             android:textSize="15sp" />
 
         <NumberPicker
+            android:id="@+id/numberPicker2"
             android:layout_width="382dp"
             android:layout_height="32dp"/>
         <!--android:minValue="@{0}"
@@ -67,6 +72,7 @@
             android:textSize="15sp" />
 
         <NumberPicker
+            android:id="@+id/numberPicker3"
             android:layout_width="382dp"
             android:layout_height="32dp"/>
         <!--android:minValue="@{0}"
@@ -82,6 +88,7 @@
             android:textSize="15sp" />
 
         <NumberPicker
+            android:id="@+id/numberPicker4"
             android:layout_width="382dp"
             android:layout_height="32dp"/>
         <!--android:minValue="@{0}"
@@ -97,6 +104,7 @@
             android:textSize="15sp" />
 
         <NumberPicker
+            android:id="@+id/numberPicker5"
             android:layout_width="382dp"
             android:layout_height="32dp"/>
             <!--android:minValue="@{0}"
