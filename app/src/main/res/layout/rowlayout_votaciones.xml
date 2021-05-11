@@ -29,6 +29,11 @@
             tools:visibility="visible" />
 
         <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
             android:id="@+id/idPresentacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,15 +42,9 @@
             android:textSize="15sp" />
 
         <NumberPicker
-            android:id="@+id/numberPicker1"
-            android:layout_width="382dp"
-            android:layout_height="32dp"/>
-        <!--
-        android:layout_width="382dp"
-        android:layout_height="32dp"/>
-        android:alue="@{0}"
-        android:maxValue="@{100}"
-        android:value="@{50}"-->
+            android:id="@+id/presentacionNP"
+            android:layout_width="385dp"
+            android:layout_height="46dp" />
 
         <TextView
             android:id="@+id/idServicio"
@@ -56,12 +55,9 @@
             android:textSize="15sp" />
 
         <NumberPicker
-            android:id="@+id/numberPicker2"
-            android:layout_width="382dp"
-            android:layout_height="32dp"/>
-        <!--android:minValue="@{0}"
-        android:maxValue="@{100}"
-        android:value="@{50}"-->
+            android:id="@+id/servicioNP"
+            android:layout_width="385dp"
+            android:layout_height="46dp"/>
 
         <TextView
             android:id="@+id/idSabor"
@@ -72,12 +68,9 @@
             android:textSize="15sp" />
 
         <NumberPicker
-            android:id="@+id/numberPicker3"
-            android:layout_width="382dp"
-            android:layout_height="32dp"/>
-        <!--android:minValue="@{0}"
-        android:maxValue="@{100}"
-        android:value="@{50}"-->
+            android:id="@+id/saborNP"
+            android:layout_width="385dp"
+            android:layout_height="46dp"/>
 
         <TextView
             android:id="@+id/idTriptico"
@@ -88,12 +81,9 @@
             android:textSize="15sp" />
 
         <NumberPicker
-            android:id="@+id/numberPicker4"
-            android:layout_width="382dp"
-            android:layout_height="32dp"/>
-        <!--android:minValue="@{0}"
-        android:maxValue="@{100}"
-        android:value="@{50}"-->
+            android:id="@+id/imagenNP"
+            android:layout_width="385dp"
+            android:layout_height="46dp"/>
 
         <TextView
             android:id="@+id/idImagen"
@@ -104,21 +94,23 @@
             android:textSize="15sp" />
 
         <NumberPicker
-            android:id="@+id/numberPicker5"
-            android:layout_width="382dp"
-            android:layout_height="32dp"/>
-            <!--android:minValue="@{0}"
-            android:maxValue="@{100}"
-            android:value="@{50}"-->
+            android:id="@+id/tripticoNP"
+            android:layout_width="385dp"
+            android:layout_height="46dp"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/botonGuardar"
             android:layout_width="172dp"
             android:layout_height="34dp"
+            android:layout_gravity="center"
             android:background="@drawable/boton_redondo"
             android:shadowDx="0"
             android:shadowDy="0"
-            android:layout_gravity="center"
 
             android:shadowRadius="5"
             android:text="Guardar votacion"

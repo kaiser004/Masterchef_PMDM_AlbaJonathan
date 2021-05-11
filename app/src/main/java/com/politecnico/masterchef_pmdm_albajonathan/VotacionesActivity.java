@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class VotacionesActivity extends AppCompatActivity {
+
     Toast toast;
     RecyclerView recyclerView;
     ArrayList<String> equipos = new ArrayList<>();
@@ -38,6 +39,7 @@ public class VotacionesActivity extends AppCompatActivity {
 
         String idR = getIntent().getStringExtra("idE");
         buscarEquipos("http://10.0.2.2/masterchef/equipos.php?id=" + idR);
+
     }
 
 
