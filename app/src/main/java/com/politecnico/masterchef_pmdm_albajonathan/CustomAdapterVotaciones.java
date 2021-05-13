@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,15 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterVotaciones.MyViewHolder> {
-
+    Map<String , Boolean> comprobar = new HashMap<String , Boolean>();
     ArrayList<String> equipos;
     Context context;
+    static boolean listo = false;
 
     //SQLite
     private List<String[]> listaVotaciones;
@@ -30,6 +34,7 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
         this.context = context;
         this.equipos = equipo;
     }
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -60,10 +65,54 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
         holder.botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (comprobar.containsKey(holder.equipo.getText())){
+                    comprobar.remove(holder.equipo.getText());
+                    bd();
+                    String eq = (String) holder.equipo.getText();
+                    db.delete(Contract.Votaciones.TABLE_NAME,"equipo=?",new String[]{eq});
+                    //db.execSQL("DELETE FROM " + Contract.Votaciones.TABLE_NAME + " WHERE equipo =" + );
+                    db.close();
+                }
+
+                if (!holder.botonGuardar.getText().equals("Editar votacion")){
+                    comprobar.put((String) holder.equipo.getText(), true);
 
                 guardarVotacion((String) holder.equipo.getText(), String.valueOf(holder.presentacion.getValue()),
                         String.valueOf(holder.servicio.getValue()), String.valueOf(holder.sabor.getValue()),
                         String.valueOf(holder.imagen.getValue()), String.valueOf(holder.triptico.getValue()));
+                }
+                //Comprobar con una variable booleana que estan seleccionadas todas
+                if (comprobar.size() == equipos.size()){
+                    listo = true;
+                }else{
+                    listo = false;
+                }
+                if (holder.botonGuardar.getText().equals("Guardar votacion")){
+                    holder.botonGuardar.setText("Editar votacion");
+                    holder.presentacion.setEnabled(false);
+                    holder.presentacion.setBackgroundColor(Color.GRAY);
+                    holder.servicio.setEnabled(false);
+                    holder.servicio.setBackgroundColor(Color.GRAY);
+                    holder.sabor.setEnabled(false);
+                    holder.sabor.setBackgroundColor(Color.GRAY);
+                    holder.imagen.setEnabled(false);
+                    holder.imagen.setBackgroundColor(Color.GRAY);
+                    holder.triptico.setEnabled(false);
+                    holder.triptico.setBackgroundColor(Color.GRAY);
+                }else{
+                    holder.botonGuardar.setText("Guardar votacion");
+                    holder.presentacion.setEnabled(true);
+                    holder.presentacion.setBackgroundColor(Color.WHITE);
+                    holder.servicio.setEnabled(true);
+                    holder.servicio.setBackgroundColor(Color.WHITE);
+                    holder.sabor.setEnabled(true);
+                    holder.sabor.setBackgroundColor(Color.WHITE);
+                    holder.imagen.setEnabled(true);
+                    holder.imagen.setBackgroundColor(Color.WHITE);
+                    holder.triptico.setEnabled(true);
+                    holder.triptico.setBackgroundColor(Color.WHITE);
+                }
+
             }
         });
 
@@ -90,6 +139,7 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
             imagen = itemView.findViewById(R.id.imagenNP);
             triptico = itemView.findViewById(R.id.tripticoNP);
             botonGuardar = itemView.findViewById(R.id.botonGuardar);
+
         }
     }
 
