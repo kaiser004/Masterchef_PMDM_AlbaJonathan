@@ -2,6 +2,7 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 
 // @Author - Alba Orbegozo / Jonathan Lopez - PMDM Masterchef - CI Politécnico Estella
 
+//Imports
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,18 +20,27 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.politecnico.masterchef_pmdm_albajonathan.R;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //Variables
+    Toast toast;
+    Boolean resul;
+    String correo, clave;
+
     EditText editCorreo, editClave;
     Button botonLogin, botonRegistro;
-    String correo;
-    Toast toast;
+
+    //Variable global con el ID del Juez logeado
+    public static String idJuez;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +48,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
-        editCorreo = findViewById(R.id.editCorreo);
         editClave = findViewById(R.id.editClave);
+        editCorreo = findViewById(R.id.editCorreo);
         botonLogin = findViewById(R.id.botonVotar);
         botonRegistro = findViewById(R.id.botonRegistro);
 
+        //Botón Registro, te lleva a la pantalla de registro
         botonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,32 +62,42 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //Botón Login, comprueba los campos Correo y Contraseña y accede a la BD para validar al juez
         botonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 correo = editCorreo.getText().toString();
-                if (!correo.isEmpty()) {
+                clave = editClave.getText().toString();
+
+                //Si contienen texto, valida al juez y lo identifica en una variable global
+                if (!correo.isEmpty() & !clave.isEmpty()) {
                     validarCorreo("http://10.0.2.2/masterchef/validar_correo.php");
+                //Si están vacíos avisa al usuario con un Toast
                 } else {
-                    toast = Toast.makeText(LoginActivity.this, "Introduzca el correo por favor", Toast.LENGTH_LONG);
+                    toast = Toast.makeText(LoginActivity.this, "Introduzca los datos de acceso por favor", Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
         });
     }
 
+    //Accede a la BD y comprueba si es juez está validado
     private void validarCorreo(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                //Si la consulta no devuelve nada, significa que el juez está validado y se pasa al ActivityEventos
                 if (!response.isEmpty()) {
+                    identificarJuez("http://10.0.2.2/masterchef/identificar_juez.php?correo=" + correo);
                     Intent i = new Intent(getApplicationContext(), EventosActivity.class);
                     startActivity(i);
+                //Si nos devuelve algo, avisamos al usuario de que no está validado en la BD
                 } else {
-                    toast = Toast.makeText(LoginActivity.this, "Correo no validado", Toast.LENGTH_LONG);
+                    toast = Toast.makeText(LoginActivity.this, "Juez no validado", Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
+        //En el caso de que haya algún error se muestran los mensajes descriptivos
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -98,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                 toast.show();
             }
         }) {
+            //Establecemos los datos para la consulta .php
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param = new HashMap<String, String>();
                 param.put("correo", editCorreo.getText().toString());
@@ -105,8 +127,39 @@ public class LoginActivity extends AppCompatActivity {
                 return param;
             }
         };
+        //Realizamos la consulta
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    //Consulta a la BD el juez registrado y lo guarda en la variable global
+    private void identificarJuez(String URL) {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                JSONObject jsonObject = null;
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        //Recogemos la ID del Juez
+                        jsonObject = response.getJSONObject(i);
+                        idJuez = jsonObject.getString("ID_juez");
+                    } catch (JSONException ex) {
+                        toast = Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                }
+            }
+        //En el caso de que haya algún error se muestran los mensajes descriptivos
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                toast = Toast.makeText(getApplicationContext(), "JUEZ NO ALMACENADO", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        });
+        //Realizamos la consulta
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonArrayRequest);
     }
 
 }

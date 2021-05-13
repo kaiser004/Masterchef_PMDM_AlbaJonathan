@@ -22,6 +22,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     ArrayList<String> ids;
     Context context;
 
+    public static String idEvento;
+
     public CustomAdapter(Context context, ArrayList<String> nombre, ArrayList<String> fecha, ArrayList<String> hora, ArrayList<String> id) {
         this.context = context;
         this.nombres = nombre;
@@ -51,9 +53,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             public void onClick(View view) {
                 Intent intent = new Intent(context, EventoActivity.class);
 
-                String id = ids.get(position);
+                idEvento = ids.get(position);
                 Bundle parametros = new Bundle();
-                parametros.putString("idE", id);
+                parametros.putString("idE", idEvento);
                 intent.putExtras(parametros);
 
                 context.startActivity(intent);
