@@ -14,7 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.politecnico.materchef_pmdm_albajonathan.R;
+import com.politecnico.masterchef_pmdm_albajonathan.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

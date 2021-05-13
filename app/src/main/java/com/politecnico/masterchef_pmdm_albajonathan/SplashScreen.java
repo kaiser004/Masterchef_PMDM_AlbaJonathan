@@ -5,7 +5,7 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import com.politecnico.materchef_pmdm_albajonathan.R;
+import com.politecnico.masterchef_pmdm_albajonathan.R;
 import java.util.Timer;
 import java.util.TimerTask;
 

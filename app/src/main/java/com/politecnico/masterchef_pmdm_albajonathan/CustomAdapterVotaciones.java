@@ -2,21 +2,29 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 
 // @Author - Alba Orbegozo / Jonathan Lopez - PMDM Masterchef - CI Politecnico Estella
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.politecnico.materchef_pmdm_albajonathan.R;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterVotaciones.MyViewHolder> {
 
     ArrayList<String> equipos;
     Context context;
-    NumberPicker presentacion, servicio, sabor, imagen, triptico;
+
+    //SQLite
+    private List<String[]> listaVotaciones;
+    VotacionesDbHelper dbHelper;
+    SQLiteDatabase db;
 
     public CustomAdapterVotaciones(Context context, ArrayList<String> equipo) {
         this.context = context;
@@ -35,16 +43,30 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         // set the data in items
         holder.equipo.setText(equipos.get(position));
-        presentacion.setMinValue(0);
-        presentacion.setMaxValue(100);
-        servicio.setMinValue(0);
-        servicio.setMaxValue(100);
-        sabor.setMinValue(0);
-        sabor.setMaxValue(100);
-        imagen.setMinValue(0);
-        imagen.setMaxValue(100);
-        triptico.setMinValue(0);
-        triptico.setMaxValue(100);
+
+        //Maximos y Minimos de los NumberPicker
+        holder.presentacion.setMinValue(0);
+        holder.presentacion.setMaxValue(100);
+        holder.servicio.setMinValue(0);
+        holder.servicio.setMaxValue(100);
+        holder.sabor.setMinValue(0);
+        holder.sabor.setMaxValue(100);
+        holder.imagen.setMinValue(0);
+        holder.imagen.setMaxValue(100);
+        holder.triptico.setMinValue(0);
+        holder.triptico.setMaxValue(100);
+
+        //CUANDO SE PULSA EN GUARDAR VOTACION, SE ALMACENAN LOS DATOS EN SQLITE
+        holder.botonGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                guardarVotacion((String) holder.equipo.getText(), String.valueOf(holder.presentacion.getValue()),
+                        String.valueOf(holder.servicio.getValue()), String.valueOf(holder.sabor.getValue()),
+                        String.valueOf(holder.imagen.getValue()), String.valueOf(holder.triptico.getValue()));
+            }
+        });
+
     }
 
     @Override
@@ -54,7 +76,8 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView equipo;// init the item view's
-
+        Button botonGuardar;
+        NumberPicker presentacion, servicio, sabor, imagen, triptico;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -66,6 +89,66 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
             sabor = itemView.findViewById(R.id.saborNP);
             imagen = itemView.findViewById(R.id.imagenNP);
             triptico = itemView.findViewById(R.id.tripticoNP);
+            botonGuardar = itemView.findViewById(R.id.botonGuardar);
         }
     }
+
+    private void bd() {
+        //Instanciamos la clase VotacionDbHelper
+        dbHelper = new VotacionesDbHelper(context);
+
+        // Gets the data repository in write mode
+        db = dbHelper.getWritableDatabase();
+    }
+
+    private void guardarVotacion(String equipo, String presentacion, String servicio, String sabor, String imagen, String triptico) {
+        bd();
+
+        //Metemos los valores a la BD
+        ContentValues values = new ContentValues();
+        values.put(Contract.Votaciones.COLUMN_NAME_EQUIPO, equipo);
+        values.put(Contract.Votaciones.COLUMN_NAME_PRESENTACION, presentacion);
+        values.put(Contract.Votaciones.COLUMN_NAME_SERVICIO, servicio);
+        values.put(Contract.Votaciones.COLUMN_NAME_SABOR, sabor);
+        values.put(Contract.Votaciones.COLUMN_NAME_IMAGEN, imagen);
+        values.put(Contract.Votaciones.COLUMN_NAME_TRIPTICO, triptico);
+
+        // Insert the new row, returning the primary key value of the new row
+        db.insert(Contract.Votaciones.TABLE_NAME, null, values);
+        values.clear();
+
+        recogerVotacion();
+    }
+
+    private void recogerVotacion() {
+        //Leemos los datos
+        Cursor cursor = db.query(
+                Contract.Votaciones.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        listaVotaciones = new ArrayList<String[]>();
+        int contador = 0;
+        while(cursor.moveToNext()) {
+            String equipo = cursor.getString(0);
+            String presentacion = cursor.getString(1);
+            String servicio = cursor.getString(2);
+            String sabor = cursor.getString(3);
+            String imagen = cursor.getString(4);
+            String triptico = cursor.getString(5);
+
+            String[] array = {equipo, presentacion, servicio, sabor, imagen, triptico};
+            listaVotaciones.add(contador, array);
+            contador++;
+        }
+
+        cursor.close();
+        db.close();
+    }
+
 }
