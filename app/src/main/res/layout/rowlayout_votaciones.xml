@@ -45,8 +45,9 @@
 
         <NumberPicker
             android:id="@+id/presentacionNP"
-            android:layout_width="385dp"
-            android:layout_height="46dp" />
+            android:layout_width="129dp"
+            android:layout_height="49dp"
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/idServicio"
@@ -58,8 +59,9 @@
 
         <NumberPicker
             android:id="@+id/servicioNP"
-            android:layout_width="385dp"
-            android:layout_height="46dp" />
+            android:layout_width="129dp"
+            android:layout_height="49dp"
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/idSabor"
@@ -71,8 +73,9 @@
 
         <NumberPicker
             android:id="@+id/saborNP"
-            android:layout_width="385dp"
-            android:layout_height="46dp" />
+            android:layout_width="129dp"
+            android:layout_height="49dp"
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/idTriptico"
@@ -84,8 +87,9 @@
 
         <NumberPicker
             android:id="@+id/imagenNP"
-            android:layout_width="385dp"
-            android:layout_height="46dp" />
+            android:layout_width="129dp"
+            android:layout_height="49dp"
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/idImagen"
@@ -97,8 +101,9 @@
 
         <NumberPicker
             android:id="@+id/tripticoNP"
-            android:layout_width="385dp"
-            android:layout_height="46dp" />
+            android:layout_width="129dp"
+            android:layout_height="49dp"
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/textView"

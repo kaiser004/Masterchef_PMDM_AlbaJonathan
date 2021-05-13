@@ -14,7 +14,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.politecnico.masterchef_pmdm_albajonathan.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,7 +22,6 @@ public class EventoActivity extends AppCompatActivity {
 
     Toast toast;
     String evento, estado;
-    int juez;
 
     Button botonJuez;
     Button botonVotacion;
@@ -46,10 +44,9 @@ public class EventoActivity extends AppCompatActivity {
         textParticipacion = findViewById(R.id.textParticipacion);
 
         evento = getIntent().getStringExtra("idE");
-        juez = 1;
-        buscarRegistrosId("http://10.0.2.2/masterchef/evento.php?id=" + evento);
+        buscarRegistrosId("http://10.0.2.2/masterchef/evento.php?id=" + CustomAdapter.idEvento);
 
-        String URL = "http://10.0.2.2/masterchef/juez.php?juez=" + juez + "&evento=" + evento;
+        String URL = "http://10.0.2.2/masterchef/juez.php?juez=" + LoginActivity.idJuez + "&evento=" + evento;
         comprobarEstado(URL);
 
         botonVotacion.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +65,7 @@ public class EventoActivity extends AppCompatActivity {
         botonJuez.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String URL = "http://10.0.2.2/masterchef/juez.php?juez=" + juez + "&evento=" + evento;
+                String URL = "http://10.0.2.2/masterchef/juez.php?juez=" + LoginActivity.idJuez + "&evento=" + evento;
                 comprobarEstado(URL);
                 comprobaciones();
             }

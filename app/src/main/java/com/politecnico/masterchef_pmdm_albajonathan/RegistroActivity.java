@@ -2,6 +2,7 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 
 // @Author - Alba Orbegozo / Jonathan Lopez - PMDM Masterchef - CI Politécnico Estella
 
+//Imports
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,10 +23,11 @@ import java.util.Map;
 
 public class RegistroActivity extends AppCompatActivity {
 
+    //Variables
     Toast toast;
     Button registrarse;
-    EditText edtNombre , edtApellidos , edtDepartamento , edtIntolerancia , edtCorreo , edtClave;
     String Nombre , Apellidos , Departamento , Intolerancia , Correo , Clave;
+    EditText edtNombre , edtApellidos , edtDepartamento , edtIntolerancia , edtCorreo , edtClave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,8 @@ public class RegistroActivity extends AppCompatActivity {
                 Correo = edtCorreo.getText().toString();
                 Clave = edtClave.getText().toString();
 
-                if (!Nombre.isEmpty() && !Apellidos.isEmpty() && !Departamento.isEmpty() && !Intolerancia.isEmpty() && !Correo.isEmpty() && !Clave.isEmpty()){
+                //Si ningún campo está vacío, se inserta el Juez en la BD y se vacían los campos
+                if (!Nombre.isEmpty() && !Apellidos.isEmpty() && !Departamento.isEmpty() && !Intolerancia.isEmpty() && !Correo.isEmpty() && !Clave.isEmpty()) {
                     añadirRegistro("http://10.0.2.2/masterchef/insertar.php");
                     edtNombre.setText("");
                     edtApellidos.setText("");
@@ -61,27 +64,31 @@ public class RegistroActivity extends AppCompatActivity {
                     edtClave.setText("");
                     Intent intent = new Intent(RegistroActivity.this , LoginActivity.class);
                     startActivity(intent);
-                }else{
+                //Si algún campo está vacío se avisa al usuario
+                } else {
                     toast = Toast.makeText(RegistroActivity.this, "No se permiten campos vacios", Toast.LENGTH_LONG);
                     toast.show();
                 }
-
             }
         });
     }
 
-    private void añadirRegistro(String URL){
+    //Accede a la BD y añade el Juez
+    private void añadirRegistro(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(RegistroActivity.this, "Operación exitosa", Toast.LENGTH_SHORT).show();
+                //Se le comunica al usuario que el Juez se ha registrado correctamente
+                Toast.makeText(RegistroActivity.this, "Juez registrado con éxito", Toast.LENGTH_SHORT).show();
             }
+        //En el caso de que haya algún error se muestran los mensajes descriptivos
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 Toast.makeText(getApplicationContext(),volleyError.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {
+            //Establecemos los datos para la consulta .php
             protected Map<String , String> getParams() throws AuthFailureError{
                 Map<String , String> param = new HashMap<String , String>();
                 param.put("Nombre" , Nombre);
@@ -93,6 +100,7 @@ public class RegistroActivity extends AppCompatActivity {
                 return param;
             }
         };
+        //Realizamos la consulta
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
