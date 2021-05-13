@@ -1,4 +1,4 @@
-package com.politecnico.materchef_pmdm_albajonathan;
+package com.politecnico.masterchef_pmdm_albajonathan;
 
 import org.junit.Test;
 

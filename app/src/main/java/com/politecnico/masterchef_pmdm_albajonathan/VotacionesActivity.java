@@ -1,25 +1,20 @@
 package com.politecnico.masterchef_pmdm_albajonathan;
 
 import android.os.Bundle;
-import android.widget.NumberPicker;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.politecnico.materchef_pmdm_albajonathan.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class VotacionesActivity extends AppCompatActivity {
 
@@ -41,7 +36,6 @@ public class VotacionesActivity extends AppCompatActivity {
         buscarEquipos("http://10.0.2.2/masterchef/equipos.php?id=" + idR);
 
     }
-
 
     private void buscarEquipos(String URL) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {

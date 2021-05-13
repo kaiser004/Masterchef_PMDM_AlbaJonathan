@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.politecnico.materchef_pmdm_albajonathan">
+    package="com.politecnico.masterchef_pmdm_albajonathan">
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
