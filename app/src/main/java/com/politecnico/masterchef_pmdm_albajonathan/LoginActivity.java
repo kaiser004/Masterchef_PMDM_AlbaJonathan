@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Si contienen texto, valida al juez y lo identifica en una variable global
                 if (!correo.isEmpty() & !clave.isEmpty()) {
-                    validarCorreo("http://10.0.2.2/masterchef/validar_correo.php");
+                    validarCorreo("http://10.0.2.2/masterchef/login_validar_correo.php");
                 //Si están vacíos avisa al usuario con un Toast
                 } else {
                     toast = Toast.makeText(LoginActivity.this, "Introduzca los datos de acceso por favor", Toast.LENGTH_LONG);
@@ -81,14 +81,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //Accede a la BD y comprueba si es juez está validado
+    //Accede a la BD y comprueba si el juez está validado
     private void validarCorreo(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //Si la consulta no devuelve nada, significa que el juez está validado y se pasa al ActivityEventos
                 if (!response.isEmpty()) {
-                    identificarJuez("http://10.0.2.2/masterchef/identificar_juez.php?correo=" + correo);
+                    identificarJuez("http://10.0.2.2/masterchef/login_identificar_juez.php?correo=" + correo);
                     Intent i = new Intent(getApplicationContext(), EventosActivity.class);
                     startActivity(i);
                 //Si nos devuelve algo, avisamos al usuario de que no está validado en la BD

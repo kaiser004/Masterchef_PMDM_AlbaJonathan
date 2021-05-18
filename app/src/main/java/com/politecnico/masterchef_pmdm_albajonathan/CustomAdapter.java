@@ -4,14 +4,11 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-import com.politecnico.masterchef_pmdm_albajonathan.R;
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
@@ -54,9 +51,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 Intent intent = new Intent(context, EventoActivity.class);
 
                 idEvento = ids.get(position);
-                Bundle parametros = new Bundle();
-                parametros.putString("idE", idEvento);
-                intent.putExtras(parametros);
 
                 context.startActivity(intent);
             }

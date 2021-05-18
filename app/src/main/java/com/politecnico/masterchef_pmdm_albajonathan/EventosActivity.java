@@ -33,23 +33,28 @@ public class EventosActivity extends AppCompatActivity  {
     Button eventosActivos;
     Button eventosPasados;
 
+    public static String estadoEvento;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventos);
         getSupportActionBar().hide();
 
+        estadoEvento = "En curso";
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "En Curso");
+        buscarRegistro("http://10.0.2.2/masterchef/eventos_buscar_eventos.php?estado=" + "En curso");
 
         eventosActivos = (Button) findViewById(R.id.btnEventosActivos);
         eventosActivos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "En Curso");
+                buscarRegistro("http://10.0.2.2/masterchef/eventos_buscar_eventos.php?estado=" + "En curso");
+                estadoEvento = "En curso";
                 nombres.clear();
                 fechas.clear();
                 horas.clear();
@@ -61,7 +66,8 @@ public class EventosActivity extends AppCompatActivity  {
         eventosPasados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscarRegistro("http://10.0.2.2/masterchef/buscar.php?estado=" + "Finalizado");
+                buscarRegistro("http://10.0.2.2/masterchef/eventos_buscar_eventos.php?estado=" + "Finalizado");
+                estadoEvento = "Finalizado";
                 nombres.clear();
                 fechas.clear();
                 horas.clear();

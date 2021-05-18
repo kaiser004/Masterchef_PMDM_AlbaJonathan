@@ -87,7 +87,7 @@
         android:id="@+id/botonVotacion"
         android:layout_width="250dp"
         android:layout_height="48dp"
-        android:background="@drawable/boton_redondo"
+        android:background="@drawable/boton_redondo_castellano"
         android:clickable="true"
         android:text="Realizar Votación"
         android:textColor="#FFFFFF"
