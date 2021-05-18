@@ -1,8 +1,13 @@
 package com.politecnico.masterchef_pmdm_albajonathan;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -28,13 +33,64 @@ public class VotacionesActivity extends AppCompatActivity {
 
     String idR;
     Toast toast;
-    Button botonVotar;
+    Button botonVotar , btnGuardar;
     RecyclerView recyclerView;
     ArrayList<String> equipos = new ArrayList<>();
+    Boolean comp = false;
+    static Boolean listo = false;
+    EventosActivity f = null;
+    Boolean cerrar , esta = false;
 
     //SQLite
     SQLiteDatabase db;
     VotacionesDbHelper dbHelper;
+
+
+    @Override
+    public void onBackPressed() {
+        if (esta == false) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("SALIR");
+            builder.setMessage("¿Estas seguro que desesa salir sin mandar la votación?");
+
+            builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    cerrar = true;
+                    salirApp(cerrar);
+                }
+            });
+
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    cerrar = false;
+                    salirApp(cerrar);
+                }
+            });
+            builder.create();
+            builder.show();
+        }else{
+            Intent intent = new Intent(VotacionesActivity.this, EventosActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    public void salirApp(boolean cerrar) {
+        if(cerrar) {
+            //super.onBackPressed();
+
+            //Hay que borrar la base de datos de SQLite antes de que salga para que no haya problemas.
+                Toast.makeText(this, "Vuelve pronto.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(VotacionesActivity.this, EventoActivity.class);
+                startActivity(intent);
+                f.finish();
+                finish();
+
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +110,13 @@ public class VotacionesActivity extends AppCompatActivity {
         botonVotar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (true){
+                comp = CustomAdapterVotaciones.listo;
+                if (comp){
                     recogerVotacion();
+                    botonVotar.setEnabled(false);
+                    listo = true;
                 }else{
-                    toast = Toast.makeText(VotacionesActivity.this, "Por favor, guarda las votaciones antes de enviarlas", Toast.LENGTH_LONG);
+                    toast = Toast.makeText(VotacionesActivity.this, "Por favor, guarda todas las votaciones antes de enviarlas", Toast.LENGTH_LONG);
                     toast.show();
                 }
 
@@ -100,6 +159,7 @@ public class VotacionesActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(VotacionesActivity.this, "Operación exitosa", Toast.LENGTH_SHORT).show();
+                esta = true;
             }
         }, new Response.ErrorListener() {
             @Override
