@@ -71,7 +71,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Si contienen texto, valida al juez y lo identifica en una variable global
                 if (!correo.isEmpty() & !clave.isEmpty()) {
-                    validarCorreo("http://10.0.2.2/masterchef/login_validar_correo.php");
+                    https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/login_validar_correo.php
+                    validarCorreo("https://politecnico-estella.ddns.net:10443/masterchef_03/login_validar_correo.php");
                 //Si están vacíos avisa al usuario con un Toast
                 } else {
                     toast = Toast.makeText(LoginActivity.this, "Introduzca los datos de acceso por favor", Toast.LENGTH_LONG);
