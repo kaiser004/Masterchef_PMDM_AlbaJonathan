@@ -45,7 +45,7 @@
         android:id="@+id/botonVotar"
         android:layout_width="250dp"
         android:layout_height="44dp"
-        android:background="@drawable/boton_redondo"
+        android:background="@drawable/boton_redondo_castellano"
         android:shadowDx="0"
         android:shadowDy="0"
 

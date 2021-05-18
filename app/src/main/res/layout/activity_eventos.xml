@@ -29,7 +29,7 @@
         android:layout_marginTop="31dp"
         android:layout_marginEnd="212dp"
         android:text="Eventos activos"
-        android:background="@drawable/boton_redondo"
+        android:background="@drawable/boton_redondo_castellano"
         android:textColor="#FFFFFF" />
 
     <androidx.appcompat.widget.AppCompatButton

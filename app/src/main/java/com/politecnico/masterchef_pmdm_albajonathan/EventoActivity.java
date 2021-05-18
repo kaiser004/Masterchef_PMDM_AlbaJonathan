@@ -2,6 +2,7 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 
 // @Author - Alba Orbegozo / Jonathan Lopez - PMDM Masterchef - CI Politécnico Estella
 
+//Imports
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,19 +10,25 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EventoActivity extends AppCompatActivity {
 
+    //Variables
     Toast toast;
-    String evento, estado;
+    String estado;
 
     Button botonJuez;
     Button botonVotacion;
@@ -34,6 +41,7 @@ public class EventoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_evento);
         getSupportActionBar().hide();
 
+        //Instanciamos las variables
         edtnombreEvento = findViewById(R.id.txtNombreEvento);
         edtlugar = findViewById(R.id.txtLugar);
         edtfecha = findViewById(R.id.txtFecha);
@@ -43,49 +51,93 @@ public class EventoActivity extends AppCompatActivity {
         botonJuez = findViewById(R.id.botonJuez);
         textParticipacion = findViewById(R.id.textParticipacion);
 
-        evento = getIntent().getStringExtra("idE");
-        buscarRegistrosId("http://10.0.2.2/masterchef/evento.php?id=" + CustomAdapter.idEvento);
 
-        String URL = "http://10.0.2.2/masterchef/juez.php?juez=" + LoginActivity.idJuez + "&evento=" + evento;
-        comprobarEstado(URL);
+        //Recogemos los datos del evento
+        buscarRegistrosId("http://10.0.2.2/masterchef/evento_datos_evento.php?id=" + CustomAdapter.idEvento);
 
+        //Recogemos la información del juez
+        String URL = "http://10.0.2.2/masterchef/evento_datos_juez.php?juez=" + LoginActivity.idJuez + "&evento=" + CustomAdapter.idEvento;
+        comprobarEstadoJuez(URL);
+
+
+        //Cuando se pulsa el botón "Realizar Votación"
         botonVotacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EventoActivity.this, VotacionesActivity.class);
-                Bundle parametros = new Bundle();
-                parametros.putString("idE", evento);
-                intent.putExtras(parametros);
-
-                intent.putExtras(parametros);
                 startActivity(intent);
             }
         });
 
+        //Cuando se pulsa el botón "txt Juez"
         botonJuez.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String URL = "http://10.0.2.2/masterchef/juez.php?juez=" + LoginActivity.idJuez + "&evento=" + evento;
-                comprobarEstado(URL);
-                comprobaciones();
+                if (estado.equals("Admitido") || estado.equals("En espera")) {
+                    cancelarJuez("http://10.0.2.2/masterchef/evento_cancelar_juez.php");
+                } else if (estado.equals("Sin solicitar")) {
+                    solicitarJuez("http://10.0.2.2/masterchef/evento_solicitar_juez.php");
+                }
             }
         });
-
     }
 
+    //Se comprueba el estado del juez
     public void comprobaciones() {
-        if (estado.equals("Admitido"))  {
-            textParticipacion.setText("Participación como Juez: ACTIVA");
-            botonJuez.setText("CANCELAR JUEZ");
-        } else if (estado.equals("Denegado")) {
-            textParticipacion.setText("Participación como Juez: DENEGADA");
-            botonJuez.setText("... JUEZ");
-        } else if (estado.equals("En espera")) {
-            textParticipacion.setText("Participación como Juez: ESPERANDO CONFIRMACIÓN");
-            botonJuez.setText("... JUEZ");
+        if (EventosActivity.estadoEvento.equals("Finalizado")) {
+            deshabilitarBotonJuez();
+
+            textParticipacion.setText("VOTACIÓN FINALIZADA");
+        } else {
+
+            if (estado.equals("Admitido")) {
+                //Establecemos el mensaje informativo
+                textParticipacion.setText("Participación como Juez: ACTIVA");
+
+                //Cambiamos el texto y color al botón juez
+                botonJuez.setText("CANCELAR JUEZ");
+                botonJuez.setBackgroundResource(R.drawable.boton_redondo_rojo);
+            } else if (estado.equals("Denegado")) {
+                //Establecemos el mensaje informativo
+                textParticipacion.setText("Participación como Juez: DENEGADA");
+
+                deshabilitarBotonJuez();
+                deshabilitarBotonVotar();
+            } else if (estado.equals("En espera")) {
+                //Establecemos el mensaje informativo
+                textParticipacion.setText("Participación como Juez: ESPERANDO CONFIRMACIÓN");
+
+                //Cambiamos el texto y color al botón juez
+                botonJuez.setText("CANCELAR JUEZ");
+                botonJuez.setBackgroundResource(R.drawable.boton_redondo_rojo);
+
+                deshabilitarBotonVotar();
+            } else if (estado.equals("Sin solicitar")) {
+                //Establecemos el mensaje informativo
+                textParticipacion.setText("Participación como Juez: SIN SOLICITAR");
+
+                //Cambiamos el texto y color al botón juez
+                botonJuez.setText("SOLICITAR JUEZ");
+                botonJuez.setBackgroundResource(R.drawable.boton_redondo_verde);
+
+                deshabilitarBotonVotar();
+            }
         }
     }
 
+    //Deshabilitamos el botón para votar
+    private void deshabilitarBotonVotar() {
+        botonVotacion.setEnabled(false);
+        botonVotacion.setVisibility(View.INVISIBLE);
+    }
+
+    //Deshabilitamos el botón juez
+    private void deshabilitarBotonJuez() {
+        botonJuez.setEnabled(false);
+        botonJuez.setVisibility(View.INVISIBLE);
+    }
+
+    //Consulta a phpMyAdmin para recuperar los datos del evento
     private void buscarRegistrosId(String URL){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
@@ -116,12 +168,14 @@ public class EventoActivity extends AppCompatActivity {
         requestQueue.add(jsonArrayRequest);
     }
 
-    private void comprobarEstado(String URL) {
+    //Consulta a phpMyAdmin para comprobar el estado de la solicitud de juez
+    private void comprobarEstadoJuez(String URL) {
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 JSONObject jsonObject = null;
+
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
@@ -133,6 +187,12 @@ public class EventoActivity extends AppCompatActivity {
                         toast.show();
                     }
                 }
+
+                if (jsonObject == null) {
+                    estado = "Sin solicitar";
+                    comprobaciones();
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -145,4 +205,60 @@ public class EventoActivity extends AppCompatActivity {
         requestQueue.add(jsonArrayRequest);
     }
 
+    //Accede a la BD y añade la solicitud
+    private void solicitarJuez(String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                estado = "En espera";
+                comprobaciones();
+            }
+            //En el caso de que haya algún error se muestran los mensajes descriptivos
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(getApplicationContext(),volleyError.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            //Establecemos los datos para la consulta .php
+            protected Map<String , String> getParams() throws AuthFailureError {
+                Map<String , String> param = new HashMap<String , String>();
+                param.put("Juez" , LoginActivity.idJuez);
+                param.put("Evento" , CustomAdapter.idEvento);
+                param.put("Solicitud" , "En espera");
+                return param;
+            }
+        };
+        //Realizamos la consulta
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    //Accede a la BD y borra la solicitud del juez
+    private void cancelarJuez(String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                estado = "Sin solicitar";
+                comprobaciones();
+            }
+            //En el caso de que haya algún error se muestran los mensajes descriptivos
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(getApplicationContext(),volleyError.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            //Establecemos los datos para la consulta .php
+            protected Map<String , String> getParams() throws AuthFailureError {
+                Map<String , String> param = new HashMap<String , String>();
+                param.put("Juez" , LoginActivity.idJuez);
+                param.put("Evento" , CustomAdapter.idEvento);
+                return param;
+            }
+        };
+        //Realizamos la consulta
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
 }
