@@ -2,8 +2,10 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 
 // @Author - Alba Orbegozo / Jonathan Lopez - PMDM Masterchef - CI Politecnico Estella
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -12,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +26,7 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
     Context context;
     ArrayList<String> equipos;
     static boolean listo = false;
+    Boolean termminado = VotacionesActivity.listo;
 
     //SQLite
     SQLiteDatabase db;
@@ -35,6 +40,7 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // inflate the item Layout
+        termminado = false;
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowlayout_votaciones, parent, false);
         MyViewHolder vh = new MyViewHolder(v); // pass the view to View Holder
         return vh;
@@ -61,58 +67,65 @@ public class CustomAdapterVotaciones extends RecyclerView.Adapter<CustomAdapterV
         holder.botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (comprobar.containsKey(holder.equipo.getText())){
-                    comprobar.remove(holder.equipo.getText());
-                    bd();
-                    String eq = (String) holder.equipo.getText();
-                    db.delete(Contract.Votaciones.TABLE_NAME,"equipo=?",new String[]{eq});
-                    //db.execSQL("DELETE FROM " + Contract.Votaciones.TABLE_NAME + " WHERE equipo =" + );
-                    db.close();
-                }
-
-                if (!holder.botonGuardar.getText().equals("Editar votacion")){
-                    comprobar.put((String) holder.equipo.getText(), true);
-
-                guardarVotacion((String) holder.equipo.getText(), String.valueOf(holder.presentacion.getValue()),
-                        String.valueOf(holder.servicio.getValue()), String.valueOf(holder.sabor.getValue()),
-                        String.valueOf(holder.imagen.getValue()), String.valueOf(holder.triptico.getValue()));
-                }
-                //Comprobar con una variable booleana que estan seleccionadas todas
-                if (comprobar.size() == equipos.size()){
-                    listo = true;
+                if (VotacionesActivity.listo){
+                    Toast toast = Toast.makeText(context.getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG);
+                    toast.show();
+                    holder.botonGuardar.setEnabled(false);
                 }else{
-                    listo = false;
-                }
-                if (holder.botonGuardar.getText().equals("Guardar votacion")){
-                    holder.botonGuardar.setText("Editar votacion");
-                    holder.presentacion.setEnabled(false);
-                    holder.presentacion.setBackgroundColor(Color.GRAY);
-                    holder.servicio.setEnabled(false);
-                    holder.servicio.setBackgroundColor(Color.GRAY);
-                    holder.sabor.setEnabled(false);
-                    holder.sabor.setBackgroundColor(Color.GRAY);
-                    holder.imagen.setEnabled(false);
-                    holder.imagen.setBackgroundColor(Color.GRAY);
-                    holder.triptico.setEnabled(false);
-                    holder.triptico.setBackgroundColor(Color.GRAY);
-                }else{
-                    holder.botonGuardar.setText("Guardar votacion");
-                    holder.presentacion.setEnabled(true);
-                    holder.presentacion.setBackgroundColor(Color.WHITE);
-                    holder.servicio.setEnabled(true);
-                    holder.servicio.setBackgroundColor(Color.WHITE);
-                    holder.sabor.setEnabled(true);
-                    holder.sabor.setBackgroundColor(Color.WHITE);
-                    holder.imagen.setEnabled(true);
-                    holder.imagen.setBackgroundColor(Color.WHITE);
-                    holder.triptico.setEnabled(true);
-                    holder.triptico.setBackgroundColor(Color.WHITE);
-                }
+                    if (comprobar.containsKey(holder.equipo.getText())){
+                        comprobar.remove(holder.equipo.getText());
+                        bd();
+                        String eq = (String) holder.equipo.getText();
+                        db.delete(Contract.Votaciones.TABLE_NAME,"equipo=?",new String[]{eq});
+                        //db.execSQL("DELETE FROM " + Contract.Votaciones.TABLE_NAME + " WHERE equipo =" + );
+                        db.close();
+                    }
 
+                    if (!holder.botonGuardar.getText().equals("Editar votacion")){
+                        comprobar.put((String) holder.equipo.getText(), true);
+
+                        guardarVotacion((String) holder.equipo.getText(), String.valueOf(holder.presentacion.getValue()),
+                                String.valueOf(holder.servicio.getValue()), String.valueOf(holder.sabor.getValue()),
+                                String.valueOf(holder.imagen.getValue()), String.valueOf(holder.triptico.getValue()));
+                    }
+                    //Comprobar con una variable booleana que estan seleccionadas todas
+                    if (comprobar.size() == equipos.size()){
+                        listo = true;
+                    }else{
+                        listo = false;
+                    }
+                    if (holder.botonGuardar.getText().equals("Guardar votacion")){
+                        holder.botonGuardar.setText("Editar votacion");
+                        holder.presentacion.setEnabled(false);
+                        holder.presentacion.setBackgroundColor(Color.GRAY);
+                        holder.servicio.setEnabled(false);
+                        holder.servicio.setBackgroundColor(Color.GRAY);
+                        holder.sabor.setEnabled(false);
+                        holder.sabor.setBackgroundColor(Color.GRAY);
+                        holder.imagen.setEnabled(false);
+                        holder.imagen.setBackgroundColor(Color.GRAY);
+                        holder.triptico.setEnabled(false);
+                        holder.triptico.setBackgroundColor(Color.GRAY);
+                    }else{
+                        holder.botonGuardar.setText("Guardar votacion");
+                        holder.presentacion.setEnabled(true);
+                        holder.presentacion.setBackgroundColor(Color.WHITE);
+                        holder.servicio.setEnabled(true);
+                        holder.servicio.setBackgroundColor(Color.WHITE);
+                        holder.sabor.setEnabled(true);
+                        holder.sabor.setBackgroundColor(Color.WHITE);
+                        holder.imagen.setEnabled(true);
+                        holder.imagen.setBackgroundColor(Color.WHITE);
+                        holder.triptico.setEnabled(true);
+                        holder.triptico.setBackgroundColor(Color.WHITE);
+                    }
+                }
             }
         });
 
     }
+
+
 
     @Override
     public int getItemCount() {
