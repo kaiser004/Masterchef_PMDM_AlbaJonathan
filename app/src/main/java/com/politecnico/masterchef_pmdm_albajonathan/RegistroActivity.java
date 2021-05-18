@@ -56,6 +56,7 @@ public class RegistroActivity extends AppCompatActivity {
                 //Si ningún campo está vacío, se inserta el Juez en la BD y se vacían los campos
                 if (!Nombre.isEmpty() && !Apellidos.isEmpty() && !Departamento.isEmpty() && !Intolerancia.isEmpty() && !Correo.isEmpty() && !Clave.isEmpty()) {
                     añadirRegistro("http://10.0.2.2/masterchef/registro_registrar_juez.php");
+                    //añadirRegistro("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/registro_registrar_juez.php");
                     edtNombre.setText("");
                     edtApellidos.setText("");
                     edtDepartamento.setText("");
