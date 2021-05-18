@@ -5,9 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -32,7 +30,7 @@ import java.util.Map;
 public class VotacionesActivity extends AppCompatActivity {
 
     Toast toast;
-    Button botonVotar , btnGuardar;
+    Button botonVotar;
     RecyclerView recyclerView;
     ArrayList<String> equipos = new ArrayList<>();
     ArrayList<String> presentaciones = new ArrayList<>();
@@ -41,61 +39,11 @@ public class VotacionesActivity extends AppCompatActivity {
     ArrayList<String> imagenes = new ArrayList<>();
     ArrayList<String> tripticos = new ArrayList<>();
 
-    Boolean comp = false;
-    static Boolean listo = false;
-    EventosActivity f = null;
-    Boolean cerrar , esta = false;
+    Boolean votacionCompletada = false;
 
     //SQLite
     SQLiteDatabase db;
     VotacionesDbHelper dbHelper;
-
-
-    @Override
-    public void onBackPressed() {
-        if (esta == false) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("SALIR");
-            builder.setMessage("¿Estas seguro que desesa salir sin mandar la votación?");
-
-            builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    cerrar = true;
-                    salirApp(cerrar);
-                }
-            });
-
-            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    cerrar = false;
-                    salirApp(cerrar);
-                }
-            });
-            builder.create();
-            builder.show();
-        }else{
-            Intent intent = new Intent(VotacionesActivity.this, EventosActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
-
-    public void salirApp(boolean cerrar) {
-        if(cerrar) {
-            //super.onBackPressed();
-
-            //Hay que borrar la base de datos de SQLite antes de que salga para que no haya problemas.
-                Toast.makeText(this, "Vuelve pronto.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(VotacionesActivity.this, EventoActivity.class);
-                startActivity(intent);
-                f.finish();
-                finish();
-
-        }
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,30 +55,69 @@ public class VotacionesActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        if (EventosActivity.estadoEvento.equals("En Curso")) {
+        botonVotar = findViewById(R.id.botonVotar);
+
+        if (EventosActivity.estadoEvento.equals("En curso")) {
             //ID Evento
             buscarEquipos("http://10.0.2.2/masterchef/votaciones_buscar_equipos.php?id=" + CustomAdapter.idEvento);
+            //buscarEquipos("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/votaciones_buscar_equipos.php?id=" + CustomAdapter.idEvento);
         } else {
+            botonVotar.setEnabled(false);
+            botonVotar.setVisibility(View.INVISIBLE);
             //ID Evento
             buscarEquiposPasados("http://10.0.2.2/masterchef/votaciones_buscar_equipos_pasados.php?id=" + CustomAdapter.idEvento);
+            //buscarEquiposPasados("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/votaciones_buscar_equipos_pasados.php?id=" + CustomAdapter.idEvento);
         }
 
-        botonVotar = findViewById(R.id.botonVotar);
         botonVotar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                comp = CustomAdapterVotaciones.listo;
-                if (comp){
+                if (CustomAdapterVotaciones.listo){
                     recogerVotacion();
                     botonVotar.setEnabled(false);
-                    listo = true;
-                }else{
+                } else {
                     toast = Toast.makeText(VotacionesActivity.this, "Por favor, guarda todas las votaciones antes de enviarlas", Toast.LENGTH_LONG);
                     toast.show();
                 }
-
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (EventosActivity.estadoEvento.equals("En curso")) {
+            if (!votacionCompletada) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("SALIR");
+                builder.setMessage("¿Estas seguro que deseas salir sin mandar la votación?");
+
+                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        salirVotaciones(true);
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        salirVotaciones(false);
+                    }
+                });
+                builder.create();
+                builder.show();
+            } else {
+                salirVotaciones(true);
+            }
+        } else {
+            salirVotaciones(true);
+        }
+    }
+
+    public void salirVotaciones(boolean cerrar) {
+        if(cerrar) {
+            this.finish();
+        }
     }
 
     private void buscarEquipos(String URL) {
@@ -205,7 +192,7 @@ public class VotacionesActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(VotacionesActivity.this, "Operación exitosa", Toast.LENGTH_SHORT).show();
-                esta = true;
+                votacionCompletada = true;
             }
         }, new Response.ErrorListener() {
             @Override
@@ -260,6 +247,7 @@ public class VotacionesActivity extends AppCompatActivity {
 
             String[] array = {presentacion, servicio, sabor, imagen, triptico, juez, evento, equipo};
             enviarVotaciones("http://10.0.2.2/masterchef/votaciones_enviar_votacion.php", array);
+            //enviarVotaciones("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/votaciones_enviar_votacion.php", array);
         }
 
         db.execSQL("DELETE FROM " + Contract.Votaciones.TABLE_NAME);
