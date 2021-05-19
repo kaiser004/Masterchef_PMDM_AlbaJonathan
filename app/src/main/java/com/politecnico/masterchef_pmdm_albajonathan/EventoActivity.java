@@ -53,12 +53,12 @@ public class EventoActivity extends AppCompatActivity {
 
 
         //Recogemos los datos del evento
-        buscarRegistrosId("http://10.0.2.2/masterchef/evento_datos_evento.php?id=" + CustomAdapter.idEvento);
-        //buscarRegistrosId("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_datos_evento.php?id=" + CustomAdapter.idEvento);
+        //buscarRegistrosId("http://10.0.2.2/masterchef/evento_datos_evento.php?id=" + CustomAdapter.idEvento);
+        buscarRegistrosId("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_datos_evento.php?id=" + CustomAdapter.idEvento);
 
         //Recogemos la información del juez
-        String URL = "http://10.0.2.2/masterchef/evento_datos_juez.php?juez=" + LoginActivity.idJuez + "&evento=" + CustomAdapter.idEvento;
-        //String URL = "https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_datos_juez.php?juez=" + LoginActivity.idJuez + "&evento=" + CustomAdapter.idEvento;
+        //String URL = "http://10.0.2.2/masterchef/evento_datos_juez.php?juez=" + LoginActivity.idJuez + "&evento=" + CustomAdapter.idEvento;
+        String URL = "https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_datos_juez.php?juez=" + LoginActivity.idJuez + "&evento=" + CustomAdapter.idEvento;
         comprobarEstadoJuez(URL);
 
 
@@ -76,11 +76,11 @@ public class EventoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (estado.equals("Admitido") || estado.equals("En espera")) {
-                    cancelarJuez("http://10.0.2.2/masterchef/evento_cancelar_juez.php");
-                    //cancelarJuez("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_cancelar_juez.php");
+                    //cancelarJuez("http://10.0.2.2/masterchef/evento_cancelar_juez.php");
+                    cancelarJuez("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_cancelar_juez.php");
                 } else if (estado.equals("Sin solicitar")) {
-                    solicitarJuez("http://10.0.2.2/masterchef/evento_solicitar_juez.php");
-                    //solicitarJuez("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_solicitar_juez.php");
+                    //solicitarJuez("http://10.0.2.2/masterchef/evento_solicitar_juez.php");
+                    solicitarJuez("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_solicitar_juez.php");
                 }
             }
         });
@@ -94,7 +94,6 @@ public class EventoActivity extends AppCompatActivity {
             botonVotacion.setText("VER VOTACION");
             textParticipacion.setText("VOTACIÓN FINALIZADA");
         } else {
-
             if (estado.equals("Admitido")) {
                 //Establecemos el mensaje informativo
                 textParticipacion.setText("Participación como Juez: ACTIVA");
@@ -151,7 +150,7 @@ public class EventoActivity extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
-                        edtnombreEvento.setText(jsonObject.getString("Nombre_Evento"));
+                        edtnombreEvento.setText(jsonObject.getString("Nombre_evento"));
                         edtfecha.setText(jsonObject.getString("Fecha"));
                         edthora.setText(jsonObject.getString("hora"));
                         edtlugar.setText(jsonObject.getString("Lugar"));
@@ -184,7 +183,7 @@ public class EventoActivity extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
-                        textParticipacion.setText(jsonObject.getString("solicitud"));
+                        textParticipacion.setText(jsonObject.getString("Solicitud"));
                         estado = (String) textParticipacion.getText();
                         comprobaciones();
                     } catch (JSONException ex) {
