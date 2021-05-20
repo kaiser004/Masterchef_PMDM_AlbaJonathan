@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#083C3C"
-    android:textAlignment="center">
+    android:textAlignment="center"
+    android:id="@+id/fondo">
 
 
     <ImageView
