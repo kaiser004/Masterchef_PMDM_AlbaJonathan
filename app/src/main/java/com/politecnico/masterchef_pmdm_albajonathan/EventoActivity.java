@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class EventoActivity extends AppCompatActivity {
@@ -50,7 +51,6 @@ public class EventoActivity extends AppCompatActivity {
         botonVotacion = findViewById(R.id.botonVotacion);
         botonJuez = findViewById(R.id.botonJuez);
         textParticipacion = findViewById(R.id.textParticipacion);
-
 
         //Recogemos los datos del evento
         //buscarRegistrosId("http://10.0.2.2/masterchef/evento_datos_evento.php?id=" + CustomAdapter.idEvento);
@@ -88,6 +88,103 @@ public class EventoActivity extends AppCompatActivity {
 
     //Se comprueba el estado del juez
     public void comprobaciones() {
+
+        //Si el evento está finalizado
+        if (EventosActivity.estadoEvento.equals("Finalizado")) {
+            //Deshabilitamos el botón Juez
+            deshabilitarBotonJuez();
+
+            //Establecemos el mensaje informativo y cambiamos el texto del botón Votaciones
+            if (Locale.getDefault().getLanguage() == "es") {
+                botonVotacion.setText("VER VOTACION");
+                textParticipacion.setText("VOTACIÓN FINALIZADA");
+                botonVotacion.setBackgroundResource(R.drawable.boton_redondo_castellano);
+            } else if (Locale.getDefault().getLanguage() == "en")  {
+                botonVotacion.setText("SEE VOTING");
+                textParticipacion.setText("VOTING COMPLETED");
+                botonVotacion.setBackgroundResource(R.drawable.boton_redondo_ingles);
+            } else {
+                botonVotacion.setText("IKUS BOTAZIOA");
+                textParticipacion.setText("BOTAZIOA OSATUTA");
+                botonVotacion.setBackgroundResource(R.drawable.boton_redondo_euskera);
+            }
+
+        //Si el evento está "En curso"
+        } else {
+            switch (estado) {
+                case "Admitido":
+                    //Cambiamos el color al botón juez
+                    botonJuez.setBackgroundResource(R.drawable.boton_redondo_rojo);
+
+                    //Establecemos el mensaje informativo y cambiamos el texto del botón Juez
+                    if (Locale.getDefault().getLanguage() == "es") {
+                        textParticipacion.setText("Participación como Juez: ACTIVA");
+                        botonJuez.setText("CANCELAR JUEZ");
+                        botonVotacion.setBackgroundResource(R.drawable.boton_redondo_castellano);
+                    } else if (Locale.getDefault().getLanguage() == "en")  {
+                        textParticipacion.setText("Participation as Judge: ACTIVE");
+                        botonJuez.setText("CANCEL JUDGE");
+                        botonVotacion.setBackgroundResource(R.drawable.boton_redondo_ingles);
+                    } else {
+                        textParticipacion.setText("Parte hartzea epaile gisa: AKTIBOA");
+                        botonJuez.setText("UTZI EPAILEA");
+                        botonVotacion.setBackgroundResource(R.drawable.boton_redondo_euskera);
+                    }
+                    break;
+                case "Denegado":
+                    //Deshabilitamos los botones
+                    deshabilitarBotonJuez();
+                    deshabilitarBotonVotar();
+
+                    //Establecemos el mensaje informativo
+                    if (Locale.getDefault().getLanguage() == "es") {
+                        textParticipacion.setText("Participación como Juez: DENEGADA");
+                    } else if (Locale.getDefault().getLanguage() == "en")  {
+                        textParticipacion.setText("Participation as Judge: DENIED");
+                    } else {
+                        textParticipacion.setText("Parte hartzea epaile gisa: UKATUTA");
+                    }
+                    break;
+                case "En espera":
+                    //Deshabilitamos el botón para votar
+                    deshabilitarBotonVotar();
+                    //Cambiamos el color del botón Juez
+                    botonJuez.setBackgroundResource(R.drawable.boton_redondo_rojo);
+
+                    //Establecemos el mensaje informativo y cambiamos el texto del botón Juez
+                    if (Locale.getDefault().getLanguage() == "es") {
+                        textParticipacion.setText("Participación como Juez: ESPERANDO CONFIRMACIÓN");
+                        botonJuez.setText("CANCELAR JUEZ");
+                    } else if (Locale.getDefault().getLanguage() == "en")  {
+                        textParticipacion.setText("Participation as Judge: WAITING CONFIRMATION");
+                        botonJuez.setText("CANCEL JUDGE");
+                    } else {
+                        textParticipacion.setText("Parte hartzea epaile gisa: BAIEZTAPENAREN ZAIN");
+                        botonJuez.setText("UTZI EPAILEA");
+                    }
+                    break;
+                case "Sin solicitar":
+                    //Deshabilitamos el botón votar y cambiamos el color al botón Juez
+                    deshabilitarBotonVotar();
+                    botonJuez.setBackgroundResource(R.drawable.boton_redondo_verde);
+
+                    //Establecemos el mensaje informativo y cambiamos el texto del botón Juez
+                    if (Locale.getDefault().getLanguage() == "es") {
+                        textParticipacion.setText("Participación como Juez: SIN SOLICITAR");
+                        botonJuez.setText("SOLICITAR JUEZ");
+                    } else if (Locale.getDefault().getLanguage() == "en")  {
+                        textParticipacion.setText("Participation as Judge: NOT REQUESTED");
+                        botonJuez.setText("REQUEST JUDGE");
+                    } else {
+                        textParticipacion.setText("Parte hartzea epaile gisa: EZ DA ESKATU");
+                        botonJuez.setText("EPAILEA ESKATU");
+                    }
+                    break;
+            }
+        }
+
+
+        /*
         if (EventosActivity.estadoEvento.equals("Finalizado")) {
             deshabilitarBotonJuez();
 
@@ -127,6 +224,7 @@ public class EventoActivity extends AppCompatActivity {
                 deshabilitarBotonVotar();
             }
         }
+         */
     }
 
     //Deshabilitamos el botón para votar

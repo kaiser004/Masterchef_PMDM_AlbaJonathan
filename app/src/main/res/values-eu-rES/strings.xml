@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Masterchef_PMDM_AlbaJonathan</string>
+    <string name="Correo">Posta elektronikoa</string>
+    <string name="Contraseña">Pasahitza</string>
+    <string name="IniciarSesion">Saioa hasi</string>
+    <string name="Registrarse">Sartu</string>
+    <string name="TituloRegistro">GRABATU</string>
+    <string name="Nombre">Izena</string>
+    <string name="Apellidos">Abizenak</string>
+    <string name="Departamento">Sail</string>
+    <string name="Intolerancia">Intolerantzia</string>
+    <string name="EventosActivos">EKITALDI AKTIBOAK</string>
+    <string name="EventosPasados">IRAGANAKO EKITALDIAK</string>
+    <string name="Votaciones">BOTA</string>
+    <string name="EnviarVotaciones">BOTOAK BIDALI</string>
+    <string name="Presentacion">Aurkezpena</string>
+    <string name="Servicio">Zerbitzua</string>
+    <string name="Sabor">Dastamena</string>
+    <string name="Imagen">Irudia</string>
+    <string name="Triptico">Triptikoa</string>
+    <string name="GuardarVotacion">GORDE BOTA</string>
+    <string name="RealizarVotacion">BOZKETA</string>
+</resources>

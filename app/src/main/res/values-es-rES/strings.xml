@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Masterchef_PMDM_AlbaJonathan</string>
+    <string name="Correo">Correo Electrónico</string>
+    <string name="Contraseña">Contraseña</string>
+    <string name="IniciarSesion">Iniciar Sesión</string>
+    <string name="Registrarse">Registrarse</string>
+    <string name="TituloRegistro">REGISTRO</string>
+    <string name="Nombre">Nombre</string>
+    <string name="Apellidos">Apellidos</string>
+    <string name="Departamento">Departamento</string>
+    <string name="Intolerancia">Intolerancia</string>
+    <string name="EventosActivos">EVENTOS ACTIVOS</string>
+    <string name="EventosPasados">EVENTOS PASADOS</string>
+    <string name="Votaciones">VOTACIONES</string>
+    <string name="EnviarVotaciones">ENVIAR VOTACIONES</string>
+    <string name="Presentacion">"Presentación: "</string>
+    <string name="Servicio">"Servicio: "</string>
+    <string name="Sabor">"Sabor: "</string>
+    <string name="Imagen">"Imagen: "</string>
+    <string name="Triptico">"Triptico: "</string>
+    <string name="GuardarVotacion">GUARDAR VOTACION</string>
+    <string name="RealizarVotacion">REALIZAR VOTACION</string>
+</resources>

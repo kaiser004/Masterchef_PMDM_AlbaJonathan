@@ -4,12 +4,15 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 
 //Imports
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -27,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
@@ -52,6 +56,17 @@ public class LoginActivity extends AppCompatActivity {
         editCorreo = findViewById(R.id.editCorreo);
         botonLogin = findViewById(R.id.botonVotar);
         botonRegistro = findViewById(R.id.botonRegistro);
+
+        ConstraintLayout fondo = findViewById(R.id.fondo);
+
+        //Comprobamos el idioma y cambiamos el color de los botones
+        if (Locale.getDefault().getLanguage() == "es") {
+            fondo.setBackgroundColor(Color.parseColor("#083C3C"));
+        } else if (Locale.getDefault().getLanguage() == "en")  {
+            fondo.setBackgroundColor(Color.parseColor("#253165"));
+        } else {
+            fondo.setBackgroundColor(Color.parseColor("#5C1212"));
+        }
 
         //Botón Registro, te lleva a la pantalla de registro
         botonRegistro.setOnClickListener(new View.OnClickListener() {

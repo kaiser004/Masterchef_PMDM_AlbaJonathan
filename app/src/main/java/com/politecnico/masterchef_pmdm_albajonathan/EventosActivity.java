@@ -20,10 +20,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class EventosActivity extends AppCompatActivity  {
 
     Toast toast;
+    Button botonEventosActivos;
     RecyclerView recyclerView;
     ArrayList<String> nombres = new ArrayList<>();
     ArrayList<String> fechas = new ArrayList<>();
@@ -40,6 +42,17 @@ public class EventosActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventos);
         getSupportActionBar().hide();
+
+        botonEventosActivos = findViewById(R.id.btnEventosActivos);
+
+        //Comprobamos el idioma y cambiamos el color de los botones
+        if (Locale.getDefault().getLanguage() == "es") {
+            botonEventosActivos.setBackgroundResource(R.drawable.boton_redondo_castellano);
+        } else if (Locale.getDefault().getLanguage() == "en")  {
+            botonEventosActivos.setBackgroundResource(R.drawable.boton_redondo_ingles);
+        } else {
+            botonEventosActivos.setBackgroundResource(R.drawable.boton_redondo_euskera);
+        }
 
         estadoEvento = "En curso";
 
