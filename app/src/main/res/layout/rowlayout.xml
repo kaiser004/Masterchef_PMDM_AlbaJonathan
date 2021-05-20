@@ -11,9 +11,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:fadingEdge="horizontal|vertical"
+        android:orientation="vertical"
         android:padding="10dp">
         <!--
         items for a single row of RecyclerView

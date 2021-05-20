@@ -53,11 +53,9 @@ public class EventoActivity extends AppCompatActivity {
         textParticipacion = findViewById(R.id.textParticipacion);
 
         //Recogemos los datos del evento
-        //buscarRegistrosId("http://10.0.2.2/masterchef/evento_datos_evento.php?id=" + CustomAdapter.idEvento);
         buscarRegistrosId("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_datos_evento.php?id=" + CustomAdapter.idEvento);
 
         //Recogemos la información del juez
-        //String URL = "http://10.0.2.2/masterchef/evento_datos_juez.php?juez=" + LoginActivity.idJuez + "&evento=" + CustomAdapter.idEvento;
         String URL = "https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_datos_juez.php?juez=" + LoginActivity.idJuez + "&evento=" + CustomAdapter.idEvento;
         comprobarEstadoJuez(URL);
 
@@ -76,10 +74,8 @@ public class EventoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (estado.equals("Admitido") || estado.equals("En espera")) {
-                    //cancelarJuez("http://10.0.2.2/masterchef/evento_cancelar_juez.php");
                     cancelarJuez("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_cancelar_juez.php");
                 } else if (estado.equals("Sin solicitar")) {
-                    //solicitarJuez("http://10.0.2.2/masterchef/evento_solicitar_juez.php");
                     solicitarJuez("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/evento_solicitar_juez.php");
                 }
             }
@@ -182,49 +178,6 @@ public class EventoActivity extends AppCompatActivity {
                     break;
             }
         }
-
-
-        /*
-        if (EventosActivity.estadoEvento.equals("Finalizado")) {
-            deshabilitarBotonJuez();
-
-            botonVotacion.setText("VER VOTACION");
-            textParticipacion.setText("VOTACIÓN FINALIZADA");
-        } else {
-            if (estado.equals("Admitido")) {
-                //Establecemos el mensaje informativo
-                textParticipacion.setText("Participación como Juez: ACTIVA");
-
-                //Cambiamos el texto y color al botón juez
-                botonJuez.setText("CANCELAR JUEZ");
-                botonJuez.setBackgroundResource(R.drawable.boton_redondo_rojo);
-            } else if (estado.equals("Denegado")) {
-                //Establecemos el mensaje informativo
-                textParticipacion.setText("Participación como Juez: DENEGADA");
-
-                deshabilitarBotonJuez();
-                deshabilitarBotonVotar();
-            } else if (estado.equals("En espera")) {
-                //Establecemos el mensaje informativo
-                textParticipacion.setText("Participación como Juez: ESPERANDO CONFIRMACIÓN");
-
-                //Cambiamos el texto y color al botón juez
-                botonJuez.setText("CANCELAR JUEZ");
-                botonJuez.setBackgroundResource(R.drawable.boton_redondo_rojo);
-
-                deshabilitarBotonVotar();
-            } else if (estado.equals("Sin solicitar")) {
-                //Establecemos el mensaje informativo
-                textParticipacion.setText("Participación como Juez: SIN SOLICITAR");
-
-                //Cambiamos el texto y color al botón juez
-                botonJuez.setText("SOLICITAR JUEZ");
-                botonJuez.setBackgroundResource(R.drawable.boton_redondo_verde);
-
-                deshabilitarBotonVotar();
-            }
-        }
-         */
     }
 
     //Deshabilitamos el botón para votar

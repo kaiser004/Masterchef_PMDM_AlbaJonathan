@@ -86,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Si contienen texto, valida al juez y lo identifica en una variable global
                 if (!correo.isEmpty() & !clave.isEmpty()) {
-                    //validarCorreo("http://10.0.2.2/masterchef/login_validar_correo.php");
                     validarCorreo("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/login_validar_correo.php");
                 //Si están vacíos avisa al usuario con un Toast
                 } else {
@@ -104,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 //Si la consulta no devuelve nada, significa que el juez está validado y se pasa al ActivityEventos
                 if (!response.isEmpty()) {
-                    //identificarJuez("http://10.0.2.2/masterchef/login_identificar_juez.php?correo=" + correo);
                     identificarJuez("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/login_identificar_juez.php?correo=" + correo);
                     Intent i = new Intent(getApplicationContext(), EventosActivity.class);
                     startActivity(i);

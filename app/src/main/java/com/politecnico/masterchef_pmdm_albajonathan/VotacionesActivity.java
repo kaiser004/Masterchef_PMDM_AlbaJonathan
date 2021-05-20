@@ -74,13 +74,11 @@ public class VotacionesActivity extends AppCompatActivity {
 
         if (EventosActivity.estadoEvento.equals("En curso")) {
             //ID Evento
-            //buscarEquipos("http://10.0.2.2/masterchef/votaciones_buscar_equipos.php?id=" + CustomAdapter.idEvento);
             buscarEquipos("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/votaciones_buscar_equipos.php?id=" + CustomAdapter.idEvento);
         } else {
             botonVotar.setEnabled(false);
             botonVotar.setVisibility(View.INVISIBLE);
             //ID Evento
-            //buscarEquiposPasados("http://10.0.2.2/masterchef/votaciones_buscar_equipos_pasados.php?id=" + CustomAdapter.idEvento);
             buscarEquiposPasados("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/votaciones_buscar_equipos_pasados.php?id=" + CustomAdapter.idEvento);
         }
 
@@ -261,7 +259,6 @@ public class VotacionesActivity extends AppCompatActivity {
             String equipo = cursor.getString(7);
 
             String[] array = {presentacion, servicio, sabor, imagen, triptico, juez, evento, equipo};
-            //enviarVotaciones("http://10.0.2.2/masterchef/votaciones_enviar_votacion.php", array);
             enviarVotaciones("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/votaciones_enviar_votacion.php", array);
         }
 
