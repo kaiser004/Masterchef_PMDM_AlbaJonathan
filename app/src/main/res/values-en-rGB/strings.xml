@@ -11,7 +11,7 @@
     <string name="Intolerancia">Intolerance</string>
     <string name="EventosActivos">ACTIVE EVENTS</string>
     <string name="EventosPasados">PAST EVENTS</string>
-    <string name="Votaciones">VOTING</string>
+    <string name="Votaciones">POLL</string>
     <string name="EnviarVotaciones">SEND VOTES</string>
     <string name="Presentacion">"Presentation: "</string>
     <string name="Servicio">"Service: "</string>

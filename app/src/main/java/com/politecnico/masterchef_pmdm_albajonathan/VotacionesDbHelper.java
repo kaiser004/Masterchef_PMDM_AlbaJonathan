@@ -9,8 +9,8 @@ import static com.politecnico.masterchef_pmdm_albajonathan.Contract.SQL_DELETE_E
 
 public class VotacionesDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
-    public static int DATABASE_VERSION = 17;
-    public static final String DATABASE_NAME = "Pruebita.db";
+    public static int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "Proyecto.db";
 
     public VotacionesDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

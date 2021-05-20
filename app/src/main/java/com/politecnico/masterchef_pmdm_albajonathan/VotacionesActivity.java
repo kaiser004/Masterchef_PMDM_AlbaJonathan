@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class VotacionesActivity extends AppCompatActivity {
@@ -56,6 +58,19 @@ public class VotacionesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         botonVotar = findViewById(R.id.botonVotar);
+        View view = findViewById(R.id.divider);
+
+        //Comprobamos el idioma y cambiamos el color de los botones
+        if (Locale.getDefault().getLanguage() == "es") {
+            view.setBackgroundResource(R.drawable.boton_redondo_castellano);
+            botonVotar.setBackgroundResource(R.drawable.boton_redondo_castellano);
+        } else if (Locale.getDefault().getLanguage() == "en")  {
+            view.setBackgroundResource(R.drawable.boton_redondo_ingles);
+            botonVotar.setBackgroundResource(R.drawable.boton_redondo_ingles);
+        } else {
+            view.setBackgroundResource(R.drawable.boton_redondo_euskera);
+            botonVotar.setBackgroundResource(R.drawable.boton_redondo_euskera);
+        }
 
         if (EventosActivity.estadoEvento.equals("En curso")) {
             //ID Evento
@@ -95,7 +110,6 @@ public class VotacionesActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         salirVotaciones(true);
-                        db.execSQL("DELETE FROM " + Contract.Votaciones.TABLE_NAME);
                     }
                 });
 
