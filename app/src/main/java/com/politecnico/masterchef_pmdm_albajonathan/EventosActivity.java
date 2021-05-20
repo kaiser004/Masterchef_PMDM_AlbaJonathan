@@ -60,14 +60,12 @@ public class EventosActivity extends AppCompatActivity  {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        //buscarRegistro("http://10.0.2.2/masterchef/eventos_buscar_eventos.php?estado=" + "En curso");
         buscarRegistro("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/eventos_buscar_eventos.php?estado=" + "En curso");
 
         eventosActivos = (Button) findViewById(R.id.btnEventosActivos);
         eventosActivos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //buscarRegistro("http://10.0.2.2/masterchef/eventos_buscar_eventos.php?estado=" + "En curso");
                 buscarRegistro("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/eventos_buscar_eventos.php?estado=" + "En curso");
                 estadoEvento = "En curso";
                 nombres.clear();
@@ -81,7 +79,6 @@ public class EventosActivity extends AppCompatActivity  {
         eventosPasados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //buscarRegistro("http://10.0.2.2/masterchef/eventos_buscar_eventos.php?estado=" + "Finalizado");
                 buscarRegistro("https://politecnico-estella.ddns.net:10443/masterchef_03/masterchef/eventos_buscar_eventos.php?estado=" + "Finalizado");
                 estadoEvento = "Finalizado";
                 nombres.clear();
