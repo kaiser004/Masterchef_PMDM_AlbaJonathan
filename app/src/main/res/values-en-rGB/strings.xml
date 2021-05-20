@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Masterchef_PMDM_AlbaJonathan</string>
     <string name="Correo">Email</string>
     <string name="Contraseña">Password</string>
-    <string name="IniciarSesion">Login</string>
     <string name="Registrarse">Sign-in</string>
     <string name="TituloRegistro">SIGN-IN</string>
     <string name="Nombre">Name</string>
@@ -13,12 +13,12 @@
     <string name="EventosPasados">PAST EVENTS</string>
     <string name="Votaciones">VOTING</string>
     <string name="EnviarVotaciones">SEND VOTES</string>
-    <string name="Presentacion">Presentation:</string>
+    <string name="Presentacion">"Presentation: "</string>
     <string name="Servicio">"Service: "</string>
-    <string name="Sabor">Taste:</string>
+    <string name="Sabor">"Taste: "</string>
     <string name="Imagen">"Image: "</string>
     <string name="Triptico">"Triptych: "</string>
     <string name="GuardarVotacion">SAVE VOTES</string>
+    <string name="IniciarSesion">Login</string>
     <string name="RealizarVotacion">VOTE</string>
-
 </resources>

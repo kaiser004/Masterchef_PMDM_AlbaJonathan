@@ -13,7 +13,7 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="77dp"
         android:layout_marginBottom="646dp"
-        android:text="VOTACIONES"
+        android:text="@string/Votaciones"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textSize="36sp"
@@ -52,7 +52,7 @@
         android:shadowDy="0"
 
         android:shadowRadius="5"
-        android:text="ENVIAR VOTACIONES"
+        android:text="@string/EnviarVotaciones"
         android:textColor="#FFFFFF"
 
         app:layout_constraintBottom_toBottomOf="parent"

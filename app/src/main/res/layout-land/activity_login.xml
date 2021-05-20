@@ -29,7 +29,7 @@
         android:shadowDy="0"
 
         android:shadowRadius="5"
-        android:text="Iniciar Sesión"
+        android:text="@string/IniciarSesion"
         android:textColor="#FFFFFF"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +45,7 @@
         android:layout_width="187dp"
         android:layout_height="42dp"
         android:background="@drawable/boton_redondo"
-        android:text="Registrarse"
+        android:text="@string/Registrarse"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#00FFFFFF"
-            android:hint="Correo Electrónico"
+            android:hint="@string/Correo"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF" />
@@ -89,17 +89,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.688">
+        app:layout_constraintVertical_bias="0.688"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="#FFFFFF">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editClave"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#00FFFFFF"
-            android:hint="Contraseña"
+            android:hint="@string/Contraseña"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:textColorHint="#FFFFFF"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

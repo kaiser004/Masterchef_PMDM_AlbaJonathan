@@ -89,7 +89,7 @@
         android:layout_height="48dp"
         android:background="@drawable/boton_redondo_castellano"
         android:clickable="true"
-        android:text="Realizar Votación"
+        android:text="@string/RealizarVotacion"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

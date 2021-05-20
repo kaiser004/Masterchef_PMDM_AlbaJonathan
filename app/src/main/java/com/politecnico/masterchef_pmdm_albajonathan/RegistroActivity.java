@@ -4,12 +4,15 @@ package com.politecnico.masterchef_pmdm_albajonathan;
 
 //Imports
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.politecnico.masterchef_pmdm_albajonathan.R;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class RegistroActivity extends AppCompatActivity {
@@ -41,6 +45,17 @@ public class RegistroActivity extends AppCompatActivity {
         edtIntolerancia = findViewById(R.id.edtIntolerancia);
         edtCorreo = findViewById(R.id.edtCorreo);
         edtClave = findViewById(R.id.edtClave);
+
+        ConstraintLayout fondo = findViewById(R.id.fondo);
+
+        //Comprobamos el idioma y cambiamos el color de los botones
+        if (Locale.getDefault().getLanguage() == "es") {
+            fondo.setBackgroundColor(Color.parseColor("#083C3C"));
+        } else if (Locale.getDefault().getLanguage() == "en")  {
+            fondo.setBackgroundColor(Color.parseColor("#253165"));
+        } else {
+            fondo.setBackgroundColor(Color.parseColor("#5C1212"));
+        }
 
         registrarse = (Button) findViewById(R.id.btnRegistro);
         registrarse.setOnClickListener(new View.OnClickListener() {

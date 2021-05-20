@@ -28,7 +28,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="31dp"
         android:layout_marginEnd="212dp"
-        android:text="Eventos activos"
+        android:text="@string/EventosActivos"
         android:background="@drawable/boton_redondo_castellano"
         android:textColor="#FFFFFF" />
 
@@ -42,7 +42,7 @@
         android:layout_marginStart="211dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
-        android:text="Eventos pasados"
+        android:text="@string/EventosPasados"
         android:background="@drawable/boton_redondo"
         android:textColor="#FFFFFF" />
 

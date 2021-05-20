@@ -39,7 +39,7 @@
             android:id="@+id/idPresentacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Presentación: "
+            android:text="@string/Presentacion"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -53,7 +53,7 @@
             android:id="@+id/idServicio"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
-            android:text="Servicio: "
+            android:text="@string/Servicio"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -67,7 +67,7 @@
             android:id="@+id/idSabor"
             android:layout_width="93dp"
             android:layout_height="wrap_content"
-            android:text="Sabor: "
+            android:text="@string/Sabor"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -81,7 +81,7 @@
             android:id="@+id/idTriptico"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
-            android:text="Imagen: "
+            android:text="@string/Imagen"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -95,7 +95,7 @@
             android:id="@+id/idImagen"
             android:layout_width="93dp"
             android:layout_height="wrap_content"
-            android:text="Triptico: "
+            android:text="@string/Triptico"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -120,7 +120,7 @@
             android:shadowDy="0"
 
             android:shadowRadius="5"
-            android:text="Guardar votacion"
+            android:text="@string/GuardarVotacion"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>

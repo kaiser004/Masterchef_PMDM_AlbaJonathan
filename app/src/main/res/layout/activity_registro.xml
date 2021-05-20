@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#083C3C">
+    android:background="#083C3C"
+    android:id="@+id/fondo">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRegistro"
@@ -29,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="115dp"
         android:layout_marginBottom="549dp"
-        android:text="Registro"
+        android:text="@string/TituloRegistro"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#FFFFFF"
@@ -68,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:hint="Nombre"
+                android:hint="@string/Nombre"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF" />
 
@@ -86,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:hint="Apellidos"
+                android:hint="@string/Apellidos"
                 android:textColor="#FFFFFF" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -103,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:hint="Departamento"
+                android:hint="@string/Departamento"
                 android:textColor="#FFFFFF" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -120,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#00FFFFFF"
-                android:hint="Intolerancia"
+                android:hint="@string/Intolerancia"
                 android:textColor="#FFFFFF" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -137,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:hint="Correo"
+                android:hint="@string/Correo"
                 android:textColor="#FFFFFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -156,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:hint="Contraseña"
+                android:hint="@string/Contraseña"
                 android:textColor="#FFFFFF"
                 android:inputType="textPassword"/>
 
