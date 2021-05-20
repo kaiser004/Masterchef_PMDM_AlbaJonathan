@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#083C3C">
+    android:background="#083C3C"
+    android:id="@+id/fondo">
 
     <TextView
         android:id="@+id/Registro"
